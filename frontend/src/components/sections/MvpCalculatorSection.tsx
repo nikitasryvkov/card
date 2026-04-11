@@ -36,7 +36,7 @@ export default function MvpCalculatorSection() {
         <div className="grid gap-0 lg:grid-cols-[1fr_0.9fr]">
           <div className="border-b border-white/10 p-8 lg:border-b-0 lg:border-r lg:p-10">
             <p className="text-xs uppercase tracking-[0.35em] text-aqua">Калькулятор стоимости MVP</p>
-            <h2 className="mt-4 text-4xl font-display text-white">Помогает быстро понять порядок бюджета до discovery-сессии</h2>
+            <h2 className="mt-4 text-4xl font-display text-white">Помогает быстро понять порядок бюджета до стартового разбора задачи</h2>
             <p className="mt-4 max-w-2xl text-base leading-8 text-mist/75">
               Это не публичный прайс-лист, а ориентир для первой консультации. После аналитики смета уточняется по
               ролям, интеграциям, рискам и требованиям к безопасности.

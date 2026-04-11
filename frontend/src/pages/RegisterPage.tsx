@@ -35,9 +35,10 @@ export default function RegisterPage() {
     <div className="mx-auto flex min-h-screen max-w-4xl items-center px-4 py-16 sm:px-6 lg:px-8">
       <form onSubmit={handleSubmit} className="w-full rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
         <p className="text-xs uppercase tracking-[0.35em] text-ember">Регистрация</p>
-        <h1 className="mt-4 text-4xl font-display">Создайте защищенный клиентский кабинет.</h1>
+        <h1 className="mt-4 text-4xl font-display">Создайте доступ в личный кабинет клиента.</h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-steel">
-          При регистрации создается аккаунт `ROLE_USER`, пароль сохраняется в виде BCrypt-хеша, а для входа в защищенный кабинет выдается JWT.
+          После регистрации вы сможете вести работу по проекту в одном месте: отслеживать этапы,
+          получать документы и хранить историю взаимодействия без разрозненной переписки.
         </p>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2">

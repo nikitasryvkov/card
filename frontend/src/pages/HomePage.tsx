@@ -9,33 +9,54 @@ import Services from "../components/sections/Services";
 import TechStackSection from "../components/sections/TechStackSection";
 
 const heroDeliverables = [
-  "MVP и внутренние системы на Java + React",
-  "Архитектура, которая выдерживает рост нагрузки",
-  "UX/UI дизайн без разрыва между макетом и реализацией",
+  "MVP, личные кабинеты и внутренние сервисы для бизнеса",
+  "Надежный backend на Java и современный frontend на React",
+  "Запуск на сервере, резервное копирование и поддержка после релиза",
 ];
 
 const operatingModel = [
-  "Проектирование highload backend и API-first архитектуры",
-  "Личные кабинеты, CRM, админ-панели и сервисные порталы",
-  "Развертывание, бэкапы, reverse proxy и сопровождение после запуска",
+  "Проектирование backend-архитектуры, API и безопасного контура доступа",
+  "Личные кабинеты, CRM, административные панели и интерфейсы для команды",
+  "Развертывание на сервере, настройка Nginx, SSL, бэкапов и сопровождения",
 ];
 
 const processSteps = [
   {
     title: "Аналитика",
-    copy: "Собираю требования, формулирую user stories, выделяю риски и границы MVP, чтобы проект стартовал без лишних допущений.",
+    copy: "Собираю требования, помогаю сформулировать состав MVP, уточняю сценарии пользователей и заранее фиксирую ограничения по срокам, интеграциям и безопасности.",
   },
   {
     title: "Проектирование",
-    copy: "Продумываю архитектуру БД, API, контуры безопасности и UX-прототипы. На этом этапе закладывается масштабируемость.",
+    copy: "Продумываю структуру базы данных, API, роли доступа, карту экранов и логику интерфейса. На этом этапе формируется фундамент, который выдержит дальнейшее развитие продукта.",
   },
   {
     title: "Разработка",
-    copy: "Итеративно собираю backend, frontend и административные сценарии. Показываю промежуточные демо и синхронизирую приоритеты.",
+    copy: "Поэтапно собираю backend, frontend и административные сценарии. На каждом этапе видно, что уже готово, что тестируется и что идет в ближайший релиз.",
   },
   {
-    title: "QA и деплой",
-    copy: "Провожу тестирование, выпускаю в продакшн, настраиваю инфраструктуру, мониторинг и дальнейшую поддержку.",
+    title: "Запуск и поддержка",
+    copy: "Настраиваю публикацию на сервере, логирование, резервное копирование и контур обновлений. После релиза проект не остается без сопровождения и контроля.",
+  },
+];
+
+const fallbackProjects = [
+  {
+    title: "Личный кабинет для сервиса услуг",
+    description:
+      "Онлайн-заявки, документы, статусы работ, история обращений и единый рабочий контур для клиента и исполнителя.",
+    stack: ["Java", "Spring Boot", "React", "PostgreSQL"],
+  },
+  {
+    title: "Внутренняя CRM и административная панель",
+    description:
+      "Управление лидами, задачами, публикацией контента, ролями доступа и рабочими процессами без хаоса в таблицах и мессенджерах.",
+    stack: ["Spring Security", "REST API", "React", "Tailwind CSS"],
+  },
+  {
+    title: "Корпоративный сайт с инфраструктурой под ключ",
+    description:
+      "Маркетинговые страницы, формы заявок, интеграция с backend, публикация на сервере, SSL, резервное копирование и дальнейшая поддержка.",
+    stack: ["Vite", "Nginx", "Docker", "Proxmox"],
   },
 ];
 
@@ -58,13 +79,14 @@ export default function HomePage() {
           <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-14 sm:px-6 lg:px-8 lg:pb-28 lg:pt-20">
             <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-aqua">Java • React • Infrastructure</p>
+                <p className="text-xs uppercase tracking-[0.35em] text-aqua">Разработка ПО • Архитектура • UX/UI</p>
                 <h1 className="mt-6 max-w-5xl text-5xl font-display leading-[0.92] text-white sm:text-6xl lg:text-7xl">
                   Создаем отказоустойчивые ИТ-решения: от интерфейса до серверной архитектуры.
                 </h1>
                 <p className="mt-6 max-w-3xl text-base leading-8 text-mist/80 sm:text-lg">
-                  Полный цикл разработки ПО, проектирование высоконагруженных систем и современный UX/UI дизайн.
-                  Реализуем ваш MVP на стеке Java + React с гарантией масштабируемости и понятным маршрутом роста.
+                  Полный цикл разработки ПО, проектирование высоконагруженных систем и современный UX/UI
+                  дизайн. Помогаю запустить MVP, личный кабинет, внутренний сервис или корпоративную
+                  платформу так, чтобы продукт можно было спокойно развивать после первого релиза.
                 </p>
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -84,7 +106,10 @@ export default function HomePage() {
 
                 <div className="mt-10 grid gap-3 sm:grid-cols-3">
                   {heroDeliverables.map((item) => (
-                    <div key={item} className="rounded-[24px] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-6 text-white/80">
+                    <div
+                      key={item}
+                      className="rounded-[24px] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-6 text-white/80"
+                    >
                       {item}
                     </div>
                   ))}
@@ -99,7 +124,7 @@ export default function HomePage() {
                   <div className="flex items-center justify-between gap-4 rounded-[28px] border border-white/10 bg-white/5 px-5 py-4">
                     <div>
                       <div className="text-xs uppercase tracking-[0.3em] text-aqua">Под ключ</div>
-                      <div className="mt-2 text-2xl font-display text-white">От MVP до production-инфраструктуры</div>
+                      <div className="mt-2 text-2xl font-display text-white">От идеи и MVP до релиза на сервере</div>
                     </div>
                     <div className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/70">
                       Clean Architecture
@@ -116,10 +141,11 @@ export default function HomePage() {
                   </div>
 
                   <div className="mt-6 rounded-[28px] border border-emerald-300/20 bg-emerald-300/10 px-5 py-5">
-                    <div className="text-xs uppercase tracking-[0.3em] text-emerald-200">Для бизнеса это значит</div>
+                    <div className="text-xs uppercase tracking-[0.3em] text-emerald-200">Результат для бизнеса</div>
                     <p className="mt-3 text-sm leading-7 text-white/80">
-                      Вы получаете не только код, а предсказуемую систему: архитектуру, дизайн, релизный контур,
-                      документирование API и поддержку после запуска.
+                      Вы получаете не только разработку, но и понятный рабочий контур: архитектуру,
+                      интерфейсы, серверную публикацию, документацию и дальнейшее сопровождение без
+                      передачи проекта между несколькими подрядчиками.
                     </p>
                   </div>
                 </div>
@@ -134,53 +160,57 @@ export default function HomePage() {
         <section id="portfolio" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-ember">Кейсы и сценарии</p>
-              <h2 className="mt-4 text-4xl font-display text-white">Примеры решений, которые можно запускать и масштабировать</h2>
+              <p className="text-xs uppercase tracking-[0.35em] text-ember">Форматы проектов</p>
+              <h2 className="mt-4 text-4xl font-display text-white">Решения, которые можно запускать и развивать без переписывания с нуля</h2>
             </div>
             <p className="max-w-xl text-sm leading-7 text-mist/70">
-              Портфолио уже связано с backend, поэтому опубликованные кейсы можно управляемо выводить из админ-панели
-              без ручной правки фронтенда.
+              Ниже показаны направления работ, с которыми я чаще всего помогаю бизнесу: личные кабинеты,
+              административные панели, внутренние сервисы и сайты с полноценным серверным контуром.
             </p>
           </div>
 
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            {projects.length > 0 ? (
-              projects.slice(0, 3).map((project) => (
-                <article
-                  key={project.id}
-                  className="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur"
-                >
-                  <div className="text-xs uppercase tracking-[0.35em] text-aqua">{translateProjectStatus(project.status)}</div>
-                  <h3 className="mt-4 text-2xl font-display text-white">{project.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-mist/75">{project.shortDescription}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {project.techStack.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-white/10 bg-[#102435] px-3 py-1 text-xs font-semibold text-white/80"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))
-            ) : (
-              <>
-                <EmptyProjectCard
-                  title="MVP B2B-платформы для сервиса с личным кабинетом"
-                  description="Каталог услуг, заявки, статусы работ, документы и уведомления в одном клиентском контуре с безопасным доступом по ролям."
-                />
-                <EmptyProjectCard
-                  title="Рефакторинг legacy backend на Spring Boot"
-                  description="Переход на современную архитектуру, нормализацию API, документацию Swagger и подготовку сервиса к горизонтальному масштабированию."
-                />
-                <EmptyProjectCard
-                  title="Дизайн-система и админ-панель для внутренней команды"
-                  description="Единая UI-система, сценарии поддержки, отчетность и ускорение вывода новых функций без хаоса в интерфейсах."
-                />
-              </>
-            )}
+            {projects.length > 0
+              ? projects.slice(0, 3).map((project) => (
+                  <article
+                    key={project.id}
+                    className="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur"
+                  >
+                    <div className="text-xs uppercase tracking-[0.35em] text-aqua">{translateProjectStatus(project.status)}</div>
+                    <h3 className="mt-4 text-2xl font-display text-white">{project.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-mist/75">{project.shortDescription}</p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {project.techStack.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-full border border-white/10 bg-[#102435] px-3 py-1 text-xs font-semibold text-white/80"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                ))
+              : fallbackProjects.map((project) => (
+                  <article
+                    key={project.title}
+                    className="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur"
+                  >
+                    <div className="text-xs uppercase tracking-[0.35em] text-aqua/80">Направление работ</div>
+                    <h3 className="mt-4 text-2xl font-display text-white">{project.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-mist/75">{project.description}</p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {project.stack.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-full border border-white/10 bg-[#102435] px-3 py-1 text-xs font-semibold text-white/80"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
           </div>
         </section>
 
@@ -188,12 +218,12 @@ export default function HomePage() {
           <div className="rounded-[40px] border border-white/10 bg-[#0d1d2b] px-6 py-12 text-white shadow-panel sm:px-10">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-aqua">Как мы работаем</p>
-                <h2 className="mt-4 text-4xl font-display text-white">Предсказуемый процесс вместо “сначала сделаем, потом подумаем”</h2>
+                <p className="text-xs uppercase tracking-[0.35em] text-aqua">Как строится работа</p>
+                <h2 className="mt-4 text-4xl font-display text-white">Предсказуемый процесс вместо хаотичной разработки без опоры на архитектуру</h2>
               </div>
               <p className="max-w-xl text-sm leading-7 text-white/70">
-                На каждом этапе видно, что происходит с проектом: какие решения приняты, что уже в разработке и что
-                выходит в продакшн.
+                На каждом этапе понятно, что уже сделано, какие решения приняты, где находятся риски и
+                когда проект переходит к следующему шагу: от аналитики до публикации на сервере.
               </p>
             </div>
 
@@ -222,16 +252,6 @@ function ProcessStep({ index, title, copy }: { index: number; title: string; cop
       <h3 className="mt-4 text-2xl font-display text-white">{title}</h3>
       <p className="mt-4 text-sm leading-7 text-white/70">{copy}</p>
     </div>
-  );
-}
-
-function EmptyProjectCard({ title, description }: { title: string; description: string }) {
-  return (
-    <article className="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur">
-      <div className="text-xs uppercase tracking-[0.35em] text-aqua/80">Типовой сценарий</div>
-      <h3 className="mt-4 text-2xl font-display text-white">{title}</h3>
-      <p className="mt-3 text-sm leading-7 text-mist/75">{description}</p>
-    </article>
   );
 }
 

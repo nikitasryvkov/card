@@ -45,8 +45,8 @@ export default function ContactSection() {
           <p className="text-xs uppercase tracking-[0.35em] text-ember">Контакты</p>
           <h2 className="mt-4 text-4xl font-display text-white">Обсудим задачу, архитектуру и реалистичный план запуска</h2>
           <p className="mt-4 max-w-2xl text-base leading-8 text-mist/75">
-            На первом касании достаточно короткого описания задачи. Дальше можно быстро перейти к созвону, discovery
-            или предварительной смете под ваш формат проекта.
+            На первом касании достаточно короткого описания задачи. Дальше можно быстро перейти к созвону, разбору
+            задачи или предварительной смете под ваш формат проекта.
           </p>
 
           <div className="mt-8 space-y-4">

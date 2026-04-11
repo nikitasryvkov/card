@@ -1,17 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import { useLogout, useSession } from "../modules/auth/auth-hooks";
 
-const projects = [
-  { name: "Редизайн сайта и структуры услуг", status: "В работе", milestone: "Авторизация и API портфолио", progress: "72%" },
-  { name: "Автоматизация CRM-процессов", status: "На проверке", milestone: "QA сценариев обработки заявок", progress: "88%" },
+const workspaceModules = [
+  {
+    title: "Статусы проекта",
+    description: "Здесь удобно отслеживать текущий этап работ, приоритеты, согласования и ближайшие релизы.",
+    items: ["Этапы и сроки", "Комментарии по задачам", "Промежуточные согласования"],
+  },
+  {
+    title: "Документы и материалы",
+    description: "В одном месте собираются договоры, счета, закрывающие документы, макеты и материалы по проекту.",
+    items: ["Договоры и приложения", "Счета и акты", "Файлы, макеты и спецификации"],
+  },
+  {
+    title: "Поддержка и коммуникация",
+    description: "Рабочие вопросы, обращения и договоренности фиксируются в едином контуре без потери контекста.",
+    items: ["История обращений", "Приоритеты и статусы", "Ответы и договоренности"],
+  },
 ];
 
-const tickets = [
-  { subject: "Форматирование PDF-счета", priority: "Средний", status: "Открыт" },
-  { subject: "Доступ к загрузке подписанного договора", priority: "Высокий", status: "Ждем ответ" },
+const clientBenefits = [
+  "Все материалы по проекту находятся в одном рабочем пространстве.",
+  "Не нужно собирать переписку по почте и мессенджерам в ручном режиме.",
+  "Доступ к документам и рабочим этапам открывается только авторизованным пользователям.",
 ];
-
-const documents = ["Договор на оказание услуг.pdf", "Гайд по фирменному стилю.fig", "Материалы спринта 03.zip"];
 
 export default function ClientDashboardPage() {
   const navigate = useNavigate();
@@ -24,9 +36,10 @@ export default function ClientDashboardPage() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.35em] text-aqua">Кабинет клиента</p>
-            <h1 className="mt-4 text-4xl font-display text-white">С возвращением, {session?.fullName ?? "клиент"}.</h1>
+            <h1 className="mt-4 text-4xl font-display text-white">Здравствуйте, {session?.fullName ?? "клиент"}.</h1>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">
-              Эта защищенная зона предназначена для статусов проекта, доступа к документам, отслеживания счетов и общения с поддержкой.
+              Это закрытая рабочая зона для проекта: здесь можно видеть этапы работ, получать документы,
+              хранить материалы и вести коммуникацию в одном месте.
             </p>
           </div>
           <button
@@ -41,31 +54,25 @@ export default function ClientDashboardPage() {
         </div>
       </div>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="mt-8 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         <section className="rounded-[32px] border border-black/5 bg-white/80 p-6 shadow-panel">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-ember">Проекты</p>
-              <h2 className="mt-3 text-3xl font-display">Текущий статус работ</h2>
-            </div>
-            <span className="rounded-full bg-sand px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-steel">
-              Доступ по ролям
-            </span>
-          </div>
+          <p className="text-xs uppercase tracking-[0.35em] text-ember">Рабочие модули</p>
+          <h2 className="mt-3 text-3xl font-display text-ink">Все, что нужно для сопровождения проекта</h2>
 
-          <div className="mt-6 space-y-4">
-            {projects.map((project) => (
-              <article key={project.name} className="rounded-[28px] bg-sand p-5">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <h3 className="text-xl font-display">{project.name}</h3>
-                    <p className="mt-2 text-sm text-steel">{project.milestone}</p>
-                  </div>
-                  <div className="text-sm font-semibold text-ink">{project.progress}</div>
-                </div>
-                <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.25em] text-steel">
-                  <span>{project.status}</span>
-                  <span>Активный этап</span>
+          <div className="mt-6 grid gap-4">
+            {workspaceModules.map((module) => (
+              <article key={module.title} className="rounded-[28px] bg-sand p-5">
+                <h3 className="text-xl font-display text-ink">{module.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-steel">{module.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {module.items.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-black/10 bg-white px-3 py-1 text-xs font-semibold text-ink"
+                    >
+                      {item}
+                    </span>
+                  ))}
                 </div>
               </article>
             ))}
@@ -74,11 +81,11 @@ export default function ClientDashboardPage() {
 
         <div className="space-y-6">
           <section className="rounded-[32px] border border-black/5 bg-white/80 p-6 shadow-panel">
-            <p className="text-xs uppercase tracking-[0.35em] text-ember">Документы</p>
-            <h2 className="mt-3 text-2xl font-display">Общие файлы</h2>
+            <p className="text-xs uppercase tracking-[0.35em] text-ember">Преимущества кабинета</p>
+            <h2 className="mt-3 text-2xl font-display text-ink">Прозрачность работы без лишней переписки</h2>
             <div className="mt-5 space-y-3">
-              {documents.map((item) => (
-                <div key={item} className="rounded-2xl bg-sand px-4 py-3 text-sm font-medium text-ink">
+              {clientBenefits.map((item) => (
+                <div key={item} className="rounded-2xl bg-sand px-4 py-4 text-sm leading-7 text-ink">
                   {item}
                 </div>
               ))}
@@ -86,17 +93,12 @@ export default function ClientDashboardPage() {
           </section>
 
           <section className="rounded-[32px] border border-black/5 bg-white/80 p-6 shadow-panel">
-            <p className="text-xs uppercase tracking-[0.35em] text-ember">Поддержка</p>
-            <h2 className="mt-3 text-2xl font-display">Последние обращения</h2>
-            <div className="mt-5 space-y-3">
-              {tickets.map((ticket) => (
-                <div key={ticket.subject} className="rounded-2xl bg-sand px-4 py-4">
-                  <div className="font-semibold text-ink">{ticket.subject}</div>
-                  <div className="mt-2 text-xs uppercase tracking-[0.25em] text-steel">
-                    {ticket.priority} приоритет • {ticket.status}
-                  </div>
-                </div>
-              ))}
+            <p className="text-xs uppercase tracking-[0.35em] text-ember">Доступ и безопасность</p>
+            <h2 className="mt-3 text-2xl font-display text-ink">Материалы проекта доступны только авторизованным пользователям</h2>
+            <div className="mt-5 grid gap-3">
+              <div className="rounded-2xl bg-sand px-4 py-4 text-sm text-steel">Защищенный вход в рабочую зону</div>
+              <div className="rounded-2xl bg-sand px-4 py-4 text-sm text-steel">Разграничение доступа по ролям</div>
+              <div className="rounded-2xl bg-sand px-4 py-4 text-sm text-steel">Единая история взаимодействия по проекту</div>
             </div>
           </section>
         </div>

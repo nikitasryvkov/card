@@ -25,7 +25,7 @@ export default function SiteHeader() {
           </div>
           <div>
             <div className="font-display text-lg text-white">Срывков Systems</div>
-            <div className="text-xs uppercase tracking-[0.3em] text-white/50">Java • React • Infrastructure</div>
+            <div className="text-xs uppercase tracking-[0.3em] text-white/50">Java • React • Серверная архитектура</div>
           </div>
         </Link>
 

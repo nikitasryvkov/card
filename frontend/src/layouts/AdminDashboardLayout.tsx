@@ -1,13 +1,19 @@
-import { Outlet } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useLogout, useSession } from "../modules/auth/auth-hooks";
 
 const menu = [
-  { label: "Обзор", value: "Ключевые показатели в реальном времени" },
-  { label: "Лиды", value: "CRM и воронка входящих заявок" },
-  { label: "Проекты", value: "Кейсы, производство и клиентские задачи" },
-  { label: "Финансы", value: "Счета, договоры и платежи" },
-  { label: "Поддержка", value: "Тикеты и эскалации" },
+  { label: "Обзор", value: "Сводка по рабочим зонам и ключевым операциям" },
+  { label: "Заявки", value: "Обработка обращений и первичный контакт" },
+  { label: "Портфолио", value: "Публикация кейсов и управление контентом" },
+  { label: "Документы", value: "Договоры, счета и закрывающие материалы" },
+  { label: "Поддержка", value: "Единый журнал вопросов и сопровождения" },
+];
+
+const overviewCards = [
+  { label: "Заявки", value: "под контролем" },
+  { label: "Контент", value: "в одной панели" },
+  { label: "Документы", value: "по ролям" },
+  { label: "Поддержка", value: "без потери контекста" },
 ];
 
 export default function AdminDashboardLayout() {
@@ -21,9 +27,9 @@ export default function AdminDashboardLayout() {
         <aside className="border-b border-white/10 bg-white/5 p-6 lg:border-b-0 lg:border-r">
           <div className="space-y-2">
             <p className="text-xs uppercase tracking-[0.35em] text-white/50">Панель управления</p>
-            <h1 className="text-2xl font-display text-white">Срывков Digital OS</h1>
+            <h1 className="text-2xl font-display text-white">Управление проектами и контентом</h1>
             <p className="text-sm text-white/60">
-              Единая точка управления продажами, проектами и внутренними операциями.
+              Единая внутренняя зона для заявок, публикаций, документов, сопровождения и административных процессов.
             </p>
           </div>
 
@@ -42,7 +48,7 @@ export default function AdminDashboardLayout() {
           <div className="mt-10 rounded-3xl border border-ember/30 bg-ember/10 p-4">
             <div className="text-sm font-semibold text-white">Вы вошли как</div>
             <div className="mt-1 text-lg font-display text-white">{session?.fullName ?? "Администратор"}</div>
-            <div className="text-sm text-white/60">{session?.email ?? "admin@agency.local"}</div>
+            <div className="text-sm text-white/60">{session?.email ?? "Защищенный доступ администратора"}</div>
             <button
               className="mt-4 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:bg-sand"
               onClick={async () => {
@@ -60,16 +66,16 @@ export default function AdminDashboardLayout() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="text-xs uppercase tracking-[0.35em] text-aqua">Операционный центр</p>
-                <h2 className="mt-3 text-3xl font-display text-white">Контролируйте все ключевые точки работы с клиентом</h2>
+                <h2 className="mt-3 text-3xl font-display text-white">Управляйте заявками, публикациями и документами из одной внутренней панели</h2>
                 <p className="mt-2 max-w-2xl text-sm text-white/65">
-                  Управляйте заявками, контентом сайта, проектами, договорами и поддержкой из одной внутренней панели.
+                  Административная зона собирает все ключевые процессы в одном месте: от контента сайта и заявок
+                  до документов, рабочих статусов и сопровождения клиентов.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
-                <MetricCard label="Выручка под контролем" value="$128k" />
-                <MetricCard label="Открытые лиды" value="37" />
-                <MetricCard label="Активные спринты" value="12" />
-                <MetricCard label="Соблюдение SLA" value="98%" />
+                {overviewCards.map((card) => (
+                  <MetricCard key={card.label} label={card.label} value={card.value} />
+                ))}
               </div>
             </div>
           </header>

@@ -32,15 +32,18 @@ export default function LoginPage() {
       <div className="grid w-full gap-10 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="rounded-[36px] bg-ink p-8 text-white shadow-panel">
           <p className="text-xs uppercase tracking-[0.35em] text-aqua">Безопасный вход</p>
-          <h1 className="mt-4 text-4xl font-display text-white">Единая точка входа для клиента и внутренних процессов.</h1>
+          <h1 className="mt-4 text-4xl font-display text-white">Доступ к личному кабинету клиента и внутренним рабочим зонам.</h1>
           <p className="mt-4 text-sm leading-7 text-white/70">
-            В шаблоне уже настроены JWT-аутентификация, маршруты по ролям и защита эндпоинтов на Spring Security.
+            Здесь открывается доступ к статусам проекта, документам, обращениям в поддержку и другим
+            материалам, связанным с вашей работой по проекту.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
           <h2 className="text-3xl font-display">Вход</h2>
-          <p className="mt-3 text-sm leading-7 text-steel">Используйте зарегистрированный аккаунт клиента или административную учетную запись.</p>
+          <p className="mt-3 text-sm leading-7 text-steel">
+            Используйте email, который был указан при регистрации или согласован для доступа в рабочую зону.
+          </p>
 
           <div className="mt-8 space-y-5">
             <Field label="Email">
