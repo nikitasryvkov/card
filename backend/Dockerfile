@@ -9,6 +9,7 @@ COPY src ./src
 RUN --mount=type=cache,target=/root/.m2 mvn -B -ntp -Dmaven.wagon.http.retryHandler.count=5 clean package
 
 FROM eclipse-temurin:21-jre-alpine
+RUN apk add --no-cache wget
 RUN addgroup -S spring && adduser -S spring -G spring
 WORKDIR /app
 COPY --from=build /app/target/agency-platform-0.0.1-SNAPSHOT.jar app.jar

@@ -6,6 +6,7 @@ COPY frontend ./
 RUN npm run build
 
 FROM nginx:1.27-alpine
+RUN apk add --no-cache wget
 RUN rm -f /etc/nginx/conf.d/default.conf
 COPY infra/nginx/templates /opt/nginx/templates
 COPY infra/nginx/docker-entrypoint.d/20-select-config.sh /docker-entrypoint.d/20-select-config.sh
