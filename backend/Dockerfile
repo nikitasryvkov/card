@@ -1,8 +1,12 @@
+# syntax=docker/dockerfile:1.7
+
 FROM maven:3.9.9-eclipse-temurin-21 AS build
 WORKDIR /app
+ENV MAVEN_OPTS="-Djava.net.preferIPv4Stack=true"
 COPY pom.xml .
+RUN --mount=type=cache,target=/root/.m2 mvn -B -ntp -Dmaven.wagon.http.retryHandler.count=5 dependency:go-offline
 COPY src ./src
-RUN mvn -B clean package
+RUN --mount=type=cache,target=/root/.m2 mvn -B -ntp -Dmaven.wagon.http.retryHandler.count=5 clean package
 
 FROM eclipse-temurin:21-jre-alpine
 RUN addgroup -S spring && adduser -S spring -G spring
