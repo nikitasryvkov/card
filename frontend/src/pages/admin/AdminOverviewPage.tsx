@@ -1,13 +1,13 @@
 const leads = [
-  { company: "Helio Commerce", contact: "CTO intro call", status: "New", value: "$24k" },
-  { company: "Breach Labs", contact: "Proposal in review", status: "In Progress", value: "$61k" },
-  { company: "AtlasCare", contact: "Retainer signed", status: "Closed", value: "$96k" },
+  { company: "Helio Commerce", contact: "Созвон с CTO", status: "Новый", value: "$24k" },
+  { company: "Breach Labs", contact: "Коммерческое на согласовании", status: "В работе", value: "$61k" },
+  { company: "AtlasCare", contact: "Подписан ретейнер", status: "Закрыт", value: "$96k" },
 ];
 
 const finance = [
-  { label: "Outstanding invoices", value: "$31,800" },
-  { label: "Contracts awaiting signature", value: "4" },
-  { label: "Projected milestone billing", value: "$74,200" },
+  { label: "Счета к оплате", value: "$31,800" },
+  { label: "Договоры на подписи", value: "4" },
+  { label: "Плановый биллинг по этапам", value: "$74,200" },
 ];
 
 export default function AdminOverviewPage() {
@@ -26,11 +26,11 @@ export default function AdminOverviewPage() {
         <div className="rounded-[32px] border border-white/10 bg-white/5 p-6">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-aqua">Lead CRM</p>
-              <h3 className="mt-3 text-2xl font-display text-white">Pipeline visibility</h3>
+              <p className="text-xs uppercase tracking-[0.35em] text-aqua">CRM заявок</p>
+              <h3 className="mt-3 text-2xl font-display text-white">Видимость по воронке продаж</h3>
             </div>
             <span className="rounded-full bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-white/65">
-              Status tracking
+              Отслеживание статусов
             </span>
           </div>
 
@@ -38,10 +38,10 @@ export default function AdminOverviewPage() {
             <table className="min-w-full divide-y divide-white/10 text-sm">
               <thead className="bg-white/5 text-left text-white/55">
                 <tr>
-                  <th className="px-4 py-3 font-medium">Company</th>
-                  <th className="px-4 py-3 font-medium">Stage</th>
-                  <th className="px-4 py-3 font-medium">Status</th>
-                  <th className="px-4 py-3 font-medium">Value</th>
+                  <th className="px-4 py-3 font-medium">Компания</th>
+                  <th className="px-4 py-3 font-medium">Этап</th>
+                  <th className="px-4 py-3 font-medium">Статус</th>
+                  <th className="px-4 py-3 font-medium">Сумма</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/10">
@@ -60,23 +60,23 @@ export default function AdminOverviewPage() {
 
         <div className="space-y-6">
           <div className="rounded-[32px] border border-white/10 bg-white/5 p-6">
-            <p className="text-xs uppercase tracking-[0.35em] text-aqua">Content Ops</p>
-            <h3 className="mt-3 text-2xl font-display text-white">Portfolio publishing queue</h3>
+            <p className="text-xs uppercase tracking-[0.35em] text-aqua">Контент</p>
+            <h3 className="mt-3 text-2xl font-display text-white">Очередь публикации кейсов</h3>
             <ul className="mt-5 space-y-3 text-sm text-white/70">
-              <li className="rounded-2xl bg-white/5 px-4 py-3">New fintech case study waiting for final imagery</li>
-              <li className="rounded-2xl bg-white/5 px-4 py-3">Service page copy update scheduled for sprint close</li>
-              <li className="rounded-2xl bg-white/5 px-4 py-3">Homepage proof mapped to Q2 positioning narrative</li>
+              <li className="rounded-2xl bg-white/5 px-4 py-3">Новый fintech-кейс ждет финальные иллюстрации</li>
+              <li className="rounded-2xl bg-white/5 px-4 py-3">Обновление текстов услуг запланировано к завершению спринта</li>
+              <li className="rounded-2xl bg-white/5 px-4 py-3">Новая версия главной страницы подготовлена под позиционирование Q2</li>
             </ul>
           </div>
 
           <div className="rounded-[32px] border border-white/10 bg-white/5 p-6">
-            <p className="text-xs uppercase tracking-[0.35em] text-aqua">Support</p>
-            <h3 className="mt-3 text-2xl font-display text-white">Ticket escalation summary</h3>
+            <p className="text-xs uppercase tracking-[0.35em] text-aqua">Поддержка</p>
+            <h3 className="mt-3 text-2xl font-display text-white">Сводка по тикетам</h3>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <StatusTile label="Open" value="14" />
-              <StatusTile label="Waiting on client" value="6" />
-              <StatusTile label="Resolved today" value="9" />
-              <StatusTile label="Breached SLA" value="0" />
+              <StatusTile label="Открыто" value="14" />
+              <StatusTile label="Ждем клиента" value="6" />
+              <StatusTile label="Закрыто сегодня" value="9" />
+              <StatusTile label="Нарушено SLA" value="0" />
             </div>
           </div>
         </div>

@@ -1,26 +1,26 @@
 const services = [
   {
-    title: "Custom Software Delivery",
-    eyebrow: "Engineering",
+    title: "Разработка цифровых продуктов",
+    eyebrow: "Разработка",
     description:
-      "We architect and ship resilient platforms, internal tools, and customer-facing products using modern cloud-native practices.",
-    bullets: ["Product discovery and sprint zero", "Java + React fullstack delivery", "API-first systems and DevOps hardening"],
+      "Проектирую и запускаю устойчивые сервисы, внутренние кабинеты и клиентские продукты с понятной архитектурой и запасом на рост.",
+    bullets: ["Аналитика и проектирование MVP", "Java + React fullstack-разработка", "API-first подход и усиление DevOps"],
     accent: "from-ember/20 to-ember/5",
   },
   {
-    title: "UX/UI Systems Design",
-    eyebrow: "Design",
+    title: "UX/UI и продуктовый дизайн",
+    eyebrow: "Дизайн",
     description:
-      "From narrative landing pages to dense SaaS dashboards, we design interfaces that clarify value and reduce decision friction.",
-    bullets: ["Brand-aligned design systems", "High-conversion landing experiences", "Accessible dashboards and workflows"],
+      "От продающих лендингов до сложных интерфейсов: дизайн строится вокруг пользы, конверсии и удобства для пользователей.",
+    bullets: ["Дизайн-системы под бренд", "Лендинги с высокой конверсией", "Доступные кабинеты и рабочие сценарии"],
     accent: "from-aqua/20 to-aqua/5",
   },
   {
-    title: "Support, CRM, and Automation",
-    eyebrow: "Operations",
+    title: "CRM, поддержка и автоматизация",
+    eyebrow: "Операции",
     description:
-      "We connect delivery with growth by implementing lead capture, client dashboards, reporting, and streamlined internal ops.",
-    bullets: ["Lead pipeline and ticketing flows", "Client portal architecture", "Milestone invoicing and status automation"],
+      "Связываю сайт с операционной частью бизнеса: заявками, клиентским кабинетом, отчетностью и автоматизацией процессов.",
+    bullets: ["Воронки лидов и тикетинг", "Архитектура клиентского кабинета", "Инвойсы по этапам и статусы проектов"],
     accent: "from-panel/15 to-white/30",
   },
 ];
@@ -30,20 +30,20 @@ export default function Services() {
     <section id="services" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
         <div>
-          <p className="text-xs uppercase tracking-[0.35em] text-ember">Services</p>
+          <p className="text-xs uppercase tracking-[0.35em] text-ember">Услуги</p>
           <h2 className="mt-4 text-4xl font-display leading-tight sm:text-5xl">
-            We design the front of the business and engineer the system behind it.
+            Делаю не просто сайт, а цифровую систему, которая помогает бизнесу работать и продавать.
           </h2>
           <p className="mt-5 max-w-xl text-base leading-8 text-steel">
-            The agency stack is treated as one connected product: website, CRM, client workspace, support operations, and finance handoff.
+            Публичная часть, CRM, кабинет клиента, поддержка и финансовые процессы проектируются как единый продукт, а не как набор разрозненных модулей.
           </p>
         </div>
 
         <div className="rounded-[32px] border border-black/5 bg-white/70 p-6 shadow-panel backdrop-blur">
           <div className="grid gap-4 sm:grid-cols-3">
-            <Stat label="Avg. kickoff time" value="7 days" />
-            <Stat label="Launch readiness" value="92%" />
-            <Stat label="Retainer renewals" value="84%" />
+            <Stat label="Средний старт" value="7 дней" />
+            <Stat label="Готовность к запуску" value="92%" />
+            <Stat label="Продление поддержки" value="84%" />
           </div>
         </div>
       </div>

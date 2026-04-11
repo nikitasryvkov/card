@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import SiteHeader from "../components/navigation/SiteHeader";
+import SiteFooter from "../components/navigation/SiteFooter";
+import ContactSection from "../components/sections/ContactSection";
 import Services from "../components/sections/Services";
 import { fetchPortfolioProjects } from "../api/portfolio";
 
@@ -17,25 +19,25 @@ export default function HomePage() {
         <section className="mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 lg:px-8 lg:pb-24">
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-ember">Software Development & Design</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-ember">Разработка и дизайн для бизнеса</p>
               <h1 className="mt-5 max-w-4xl text-5xl font-display leading-[0.95] sm:text-6xl lg:text-7xl">
-                We turn agency websites into operational systems, not just brochures.
+                Создаю сайты и цифровые сервисы, которые не просто выглядят хорошо, а реально помогают бизнесу работать.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-8 text-steel sm:text-lg">
-                Northstar designs premium digital experiences, then backs them with secure client portals, CRM workflows, support tooling, and invoicing infrastructure.
+                Разрабатываю сайты-визитки, корпоративные сайты, клиентские кабинеты и внутренние системы с упором на надежность, удобство и рост конверсии.
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#contact"
                   className="inline-flex justify-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition hover:bg-panel"
                 >
-                  Start a project
+                  Обсудить задачу
                 </a>
                 <a
                   href="#portfolio"
                   className="inline-flex justify-center rounded-full border border-ink/10 px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink/25"
                 >
-                  View case studies
+                  Смотреть кейсы
                 </a>
               </div>
             </div>
@@ -45,16 +47,16 @@ export default function HomePage() {
               <div className="absolute -bottom-6 right-4 h-32 w-32 rounded-full bg-ember/15 blur-3xl" />
               <div className="relative rounded-[36px] border border-black/5 bg-white/85 p-6 shadow-panel backdrop-blur">
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <PanelStat label="Projects launched" value="46" />
-                  <PanelStat label="Avg. lead response" value="<2h" />
-                  <PanelStat label="Client NPS" value="72" />
-                  <PanelStat label="Ticket SLA" value="98%" />
+                  <PanelStat label="Запущено проектов" value="46" />
+                  <PanelStat label="Ответ по заявке" value="<2ч" />
+                  <PanelStat label="Оценка клиентов" value="72" />
+                  <PanelStat label="SLA поддержки" value="98%" />
                 </div>
                 <div className="mt-6 rounded-[28px] bg-ink p-6 text-white">
-                  <div className="text-xs uppercase tracking-[0.35em] text-aqua">Blueprint Scope</div>
-                  <div className="mt-4 text-2xl font-display">Website, dashboard, CRM, support, and invoices.</div>
+                  <div className="text-xs uppercase tracking-[0.35em] text-aqua">Что входит</div>
+                  <div className="mt-4 text-2xl font-display">Сайт, CRM, кабинет клиента, поддержка и финансовые процессы.</div>
                   <p className="mt-3 text-sm leading-7 text-white/70">
-                    This starter is shaped for agencies that need both a polished public presence and strong internal operations.
+                    Этот стартовый шаблон подходит для IT-услуг, агентств и экспертных бизнесов, которым нужен сильный публичный образ и удобная внутренняя операционка.
                   </p>
                 </div>
               </div>
@@ -67,11 +69,11 @@ export default function HomePage() {
         <section id="portfolio" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-ember">Portfolio</p>
-              <h2 className="mt-4 text-4xl font-display">Selected delivery snapshots</h2>
+              <p className="text-xs uppercase tracking-[0.35em] text-ember">Кейсы</p>
+              <h2 className="mt-4 text-4xl font-display">Примеры задач и решений</h2>
             </div>
             <p className="max-w-xl text-sm leading-7 text-steel">
-              The frontend is already wired to the backend portfolio endpoint, so published case studies can flow directly into the marketing site.
+              Фронтенд уже подключен к backend-эндпоинту портфолио, поэтому опубликованные кейсы могут автоматически попадать на сайт.
             </p>
           </div>
 
@@ -79,7 +81,7 @@ export default function HomePage() {
             {projects.length > 0 ? (
               projects.slice(0, 3).map((project) => (
                 <article key={project.id} className="rounded-[28px] border border-black/5 bg-white/80 p-6 shadow-panel">
-                  <div className="text-xs uppercase tracking-[0.35em] text-steel">{project.status.replace("_", " ")}</div>
+                  <div className="text-xs uppercase tracking-[0.35em] text-steel">{translateProjectStatus(project.status)}</div>
                   <h3 className="mt-4 text-2xl font-display">{project.title}</h3>
                   <p className="mt-3 text-sm leading-7">{project.shortDescription}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
@@ -94,16 +96,16 @@ export default function HomePage() {
             ) : (
               <>
                 <EmptyProjectCard
-                  title="Enterprise CRM Revamp"
-                  description="A lead capture and support consolidation platform with milestone invoicing and role-based internal views."
+                  title="Обновление CRM для сервисной компании"
+                  description="Система захвата заявок, поддержки клиентов и этапного выставления счетов с разграничением ролей."
                 />
                 <EmptyProjectCard
-                  title="Design System Rollout"
-                  description="A reusable React/Tailwind component system that unified public marketing pages and admin dashboards."
+                  title="Запуск дизайн-системы"
+                  description="Переиспользуемая система компонентов на React и Tailwind для сайта, кабинета клиента и внутренней панели."
                 />
                 <EmptyProjectCard
-                  title="Client Portal MVP"
-                  description="Secure document exchange, project status visibility, and support ticketing for agency retainers."
+                  title="MVP клиентского кабинета"
+                  description="Безопасный обмен документами, статусы проекта и тикетинг поддержки для клиентов на сопровождении."
                 />
               </>
             )}
@@ -112,25 +114,18 @@ export default function HomePage() {
 
         <section id="process" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="rounded-[40px] bg-ink px-6 py-12 text-white shadow-panel sm:px-10">
-            <p className="text-xs uppercase tracking-[0.35em] text-aqua">Process</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-aqua">Процесс</p>
             <div className="mt-6 grid gap-8 lg:grid-cols-3">
-              <ProcessStep title="Discover" copy="Map the funnel, operations, reporting needs, and client journey before code." />
-              <ProcessStep title="Build" copy="Ship the backend foundation, frontend experience, and admin workflows as one cohesive platform." />
-              <ProcessStep title="Scale" copy="Expand into automation, support SLAs, financial visibility, and documentation operations." />
+              <ProcessStep title="Исследование" copy="Сначала разбираю задачи бизнеса, путь клиента, точки продаж и внутренние процессы." />
+              <ProcessStep title="Реализация" copy="Далее собираю backend, frontend и административные сценарии как единую платформу." />
+              <ProcessStep title="Рост" copy="После запуска расширяем проект: автоматизация, поддержка, аналитика, документы и биллинг." />
             </div>
           </div>
         </section>
 
-        <section id="contact" className="mx-auto max-w-7xl px-4 pb-24 pt-8 sm:px-6 lg:px-8">
-          <div className="rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
-            <p className="text-xs uppercase tracking-[0.35em] text-ember">Contact</p>
-            <h2 className="mt-4 text-4xl font-display">Ready for a website that runs like part of the business?</h2>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-steel">
-              The next layer is wiring the lead form to the `leads` table and mail notifications already accounted for in the backend blueprint.
-            </p>
-          </div>
-        </section>
+        <ContactSection />
       </main>
+      <SiteFooter />
     </div>
   );
 }
@@ -156,9 +151,21 @@ function ProcessStep({ title, copy }: { title: string; copy: string }) {
 function EmptyProjectCard({ title, description }: { title: string; description: string }) {
   return (
     <article className="rounded-[28px] border border-black/5 bg-white/80 p-6 shadow-panel">
-      <div className="text-xs uppercase tracking-[0.35em] text-steel">Blueprint sample</div>
+      <div className="text-xs uppercase tracking-[0.35em] text-steel">Пример из шаблона</div>
       <h3 className="mt-4 text-2xl font-display">{title}</h3>
       <p className="mt-3 text-sm leading-7">{description}</p>
     </article>
   );
+}
+
+function translateProjectStatus(status: string) {
+  const statusMap: Record<string, string> = {
+    DISCOVERY: "Исследование",
+    IN_PROGRESS: "В работе",
+    REVIEW: "На проверке",
+    COMPLETED: "Завершен",
+    ON_HOLD: "На паузе",
+  };
+
+  return statusMap[status] ?? status;
 }

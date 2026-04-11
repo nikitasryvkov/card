@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 const navItems = [
-  { href: "#services", label: "Services" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#process", label: "Process" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#services", label: "Услуги" },
+  { href: "/#portfolio", label: "Кейсы" },
+  { href: "/#process", label: "Процесс" },
+  { href: "/#contact", label: "Контакты" },
 ];
 
 export default function SiteHeader() {
@@ -18,8 +18,8 @@ export default function SiteHeader() {
             </div>
           </div>
           <div>
-            <div className="font-display text-lg text-ink">Northstar Digital</div>
-            <div className="text-xs uppercase tracking-[0.3em] text-steel">Build. Design. Scale.</div>
+            <div className="font-display text-lg text-ink">Срывков Digital</div>
+            <div className="text-xs uppercase tracking-[0.3em] text-steel">Разработка. Дизайн. Рост.</div>
           </div>
         </Link>
 
@@ -36,13 +36,13 @@ export default function SiteHeader() {
             to="/login"
             className="hidden rounded-full border border-ink/10 px-4 py-2 text-sm font-semibold text-ink hover:border-ink/20 sm:inline-flex"
           >
-            Sign in
+            Войти
           </Link>
           <a
-            href="#contact"
+            href="/#contact"
             className="inline-flex rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-panel"
           >
-            Book discovery
+            Обсудить проект
           </a>
         </div>
       </div>

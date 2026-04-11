@@ -14,7 +14,7 @@ export default {
         mist: "#dce6ee",
       },
       fontFamily: {
-        display: ["'Space Grotesk'", "sans-serif"],
+        display: ["'Unbounded'", "sans-serif"],
         body: ["'Manrope'", "sans-serif"],
       },
       boxShadow: {

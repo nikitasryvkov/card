@@ -18,16 +18,16 @@ export default function LoginPage() {
     <div className="mx-auto flex min-h-screen max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8">
       <div className="grid w-full gap-10 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="rounded-[36px] bg-ink p-8 text-white shadow-panel">
-          <p className="text-xs uppercase tracking-[0.35em] text-aqua">Secure Access</p>
-          <h1 className="mt-4 text-4xl font-display text-white">Client dashboard and internal operations under one sign-in layer.</h1>
+          <p className="text-xs uppercase tracking-[0.35em] text-aqua">Безопасный вход</p>
+          <h1 className="mt-4 text-4xl font-display text-white">Единая точка входа для клиента и внутренних процессов.</h1>
           <p className="mt-4 text-sm leading-7 text-white/70">
-            JWT-based auth, role-aware routing, and Spring Security-backed endpoint protection are already wired into the scaffold.
+            В шаблоне уже настроены JWT-аутентификация, маршруты по ролям и защита эндпоинтов на Spring Security.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
-          <h2 className="text-3xl font-display">Sign in</h2>
-          <p className="mt-3 text-sm leading-7 text-steel">Use a registered user account or an admin account provisioned in your environment.</p>
+          <h2 className="text-3xl font-display">Вход</h2>
+          <p className="mt-3 text-sm leading-7 text-steel">Используйте зарегистрированный аккаунт клиента или административную учетную запись.</p>
 
           <div className="mt-8 space-y-5">
             <Field label="Email">
@@ -39,7 +39,7 @@ export default function LoginPage() {
                 required
               />
             </Field>
-            <Field label="Password">
+            <Field label="Пароль">
               <input
                 type="password"
                 value={password}
@@ -52,7 +52,7 @@ export default function LoginPage() {
 
           {login.isError ? (
             <p className="mt-4 rounded-2xl bg-ember/10 px-4 py-3 text-sm text-ember">
-              Authentication failed. Check credentials and backend availability.
+              Не удалось выполнить вход. Проверьте логин, пароль и доступность backend.
             </p>
           ) : null}
 
@@ -61,7 +61,7 @@ export default function LoginPage() {
             className="mt-8 inline-flex rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition hover:bg-panel disabled:opacity-60"
             disabled={login.isPending}
           >
-            {login.isPending ? "Signing in..." : "Continue"}
+            {login.isPending ? "Входим..." : "Продолжить"}
           </button>
         </form>
       </div>

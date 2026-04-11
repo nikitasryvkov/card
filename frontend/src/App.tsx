@@ -7,6 +7,8 @@ import RegisterPage from "./pages/RegisterPage";
 import ClientDashboardPage from "./pages/ClientDashboardPage";
 import AdminOverviewPage from "./pages/admin/AdminOverviewPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import RequisitesPage from "./pages/RequisitesPage";
+import PrivacyPage from "./pages/PrivacyPage";
 import ProtectedRoute from "./router/ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -17,6 +19,8 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
+      { path: "requisites", element: <RequisitesPage /> },
+      { path: "privacy", element: <PrivacyPage /> },
       {
         element: <ProtectedRoute allowedRoles={["ROLE_USER", "ROLE_ADMIN"]} />,
         children: [{ path: "dashboard", element: <ClientDashboardPage /> }],
