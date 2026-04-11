@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: it-agency-db
+    environment:
+      POSTGRES_DB: it_agency
+      POSTGRES_USER: it_agency
+      POSTGRES_PASSWORD: it_agency
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U it_agency -d it_agency"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: ./backend
+    container_name: it-agency-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/it_agency
+      SPRING_DATASOURCE_USERNAME: it_agency
+      SPRING_DATASOURCE_PASSWORD: it_agency
+      APP_ALLOWED_ORIGINS: http://localhost
+      APP_JWT_SECRET: Zm9yLWRldmVsb3BtZW50LW9ubHktcmVwbGFjZS1iZWZvcmUtcHJvZHVjdGlvbi11c2U=
+      APP_JWT_EXPIRATION_HOURS: 12
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - "8080"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: infra/nginx/Dockerfile
+    container_name: it-agency-nginx
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:
