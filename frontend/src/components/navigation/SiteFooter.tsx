@@ -21,14 +21,14 @@ export default function SiteFooter() {
             </a>
             <a
               href={businessInfo.contacts.emailHref}
-              className="rounded-full border border-white/10 px-4 py-2 font-semibold text-white hover:border-white/25"
+              className="break-all rounded-full border border-white/10 px-4 py-2 font-semibold text-white hover:border-white/25"
             >
               {businessInfo.contacts.email}
             </a>
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-[28px] border border-white/10 bg-white/5 p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-aqua/80">Идентификаторы</p>
             <div className="mt-4 space-y-3 text-sm text-white/80">

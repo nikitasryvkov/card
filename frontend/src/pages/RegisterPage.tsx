@@ -112,11 +112,11 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-4xl items-center px-4 py-16 sm:px-6 lg:px-8">
-      <form aria-busy={register.isPending} onSubmit={handleSubmit} className="w-full rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
+    <main className="mx-auto flex min-h-screen max-w-4xl items-center px-4 py-16 text-white sm:px-6 lg:px-8">
+      <form aria-busy={register.isPending} onSubmit={handleSubmit} className="w-full rounded-[36px] border border-white/10 bg-white/5 p-8 shadow-panel backdrop-blur">
         <p className="text-xs uppercase tracking-[0.35em] text-ember">Регистрация</p>
-        <h1 className="mt-4 text-4xl font-display">Создайте доступ в личный кабинет клиента.</h1>
-        <p className="mt-4 max-w-2xl text-sm leading-7 text-steel">
+        <h1 className="mt-4 text-4xl font-display text-white">Создайте доступ в личный кабинет клиента.</h1>
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-mist/75">
           После регистрации вы сможете вести работу по проекту в одном месте: отслеживать этапы,
           получать документы и хранить историю взаимодействия без разрозненной переписки.
         </p>
@@ -128,7 +128,7 @@ export default function RegisterPage() {
               placeholder="Например: Никита Срывков"
               value={form.fullName}
               onChange={(event) => updateField("fullName", event.target.value)}
-              className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none transition focus:border-ink"
+              className="w-full rounded-2xl border border-white/10 bg-[#102435] px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-aqua/50"
               required
               disabled={register.isPending}
               aria-invalid={Boolean(errors.fullName)}
@@ -140,7 +140,7 @@ export default function RegisterPage() {
               placeholder="Если есть юридическое лицо или бренд"
               value={form.companyName}
               onChange={(event) => updateField("companyName", event.target.value)}
-              className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none transition focus:border-ink"
+              className="w-full rounded-2xl border border-white/10 bg-[#102435] px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-aqua/50"
               disabled={register.isPending}
               aria-invalid={Boolean(errors.companyName)}
             />
@@ -153,7 +153,7 @@ export default function RegisterPage() {
               placeholder="name@company.ru"
               value={form.email}
               onChange={(event) => updateField("email", event.target.value)}
-              className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none transition focus:border-ink"
+              className="w-full rounded-2xl border border-white/10 bg-[#102435] px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-aqua/50"
               required
               disabled={register.isPending}
               aria-invalid={Boolean(errors.email)}
@@ -168,13 +168,13 @@ export default function RegisterPage() {
               aria-describedby="register-password-hint"
               value={form.password}
               onChange={(event) => updateField("password", event.target.value)}
-              className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none transition focus:border-ink"
+              className="w-full rounded-2xl border border-white/10 bg-[#102435] px-4 py-3 text-white outline-none transition placeholder:text-white/35 focus:border-aqua/50"
               minLength={8}
               required
               disabled={register.isPending}
               aria-invalid={Boolean(errors.password)}
             />
-            <span id="register-password-hint" className="mt-2 block text-xs leading-6 text-steel">
+            <span id="register-password-hint" className="mt-2 block text-xs leading-6 text-mist/65">
               Лучше использовать пароль длиной от 8 символов с буквами и цифрами.
             </span>
           </Field>
@@ -188,15 +188,15 @@ export default function RegisterPage() {
 
         <button
           type="submit"
-          className="mt-8 inline-flex rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition hover:bg-panel disabled:opacity-60"
+          className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-mist disabled:opacity-60"
           disabled={register.isPending}
         >
           {register.isPending ? "Создаем аккаунт..." : "Создать аккаунт"}
         </button>
 
-        <p className="mt-6 text-sm leading-7 text-steel">
+        <p className="mt-6 text-sm leading-7 text-mist/75">
           Уже есть аккаунт?{" "}
-          <Link to="/login" className="font-semibold text-ink underline underline-offset-4">
+          <Link to="/login" className="font-semibold text-white underline underline-offset-4">
             Войти
           </Link>
         </p>
@@ -216,9 +216,9 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-sm font-semibold text-ink">{label}</span>
+      <span className="mb-2 block text-sm font-semibold text-white">{label}</span>
       {children}
-      {error ? <span className="mt-2 block text-sm text-ember">{error}</span> : null}
+      {error ? <span className="mt-2 block text-sm text-amber-200">{error}</span> : null}
     </label>
   );
 }

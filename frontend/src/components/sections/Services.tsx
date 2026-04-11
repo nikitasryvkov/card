@@ -37,7 +37,7 @@ export default function Services() {
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
         <div>
           <p className="text-xs uppercase tracking-[0.35em] text-ember">Услуги</p>
-          <h2 className="mt-4 text-4xl font-display leading-tight text-white sm:text-5xl">
+          <h2 className="mt-4 text-3xl font-display leading-tight text-white sm:text-5xl">
             Три направления, с которых можно собрать MVP, кабинет клиента или внутреннюю систему без разрыва между идеей и релизом.
           </h2>
           <p className="mt-5 max-w-xl text-base leading-8 text-mist/75">
@@ -46,7 +46,7 @@ export default function Services() {
         </div>
 
         <div className="rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur">
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3">
             {serviceBenefits.map((item) => (
               <div key={item} className="rounded-2xl border border-white/10 bg-[#102435] px-4 py-5 text-sm leading-7 text-white/80">
                 {item}

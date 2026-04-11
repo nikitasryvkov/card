@@ -1,18 +1,18 @@
 import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import SiteHeader from "../components/navigation/SiteHeader";
 import SiteFooter from "../components/navigation/SiteFooter";
+import SiteHeader from "../components/navigation/SiteHeader";
 import { businessInfo } from "../lib/business";
 
 export default function RequisitesPage() {
   return (
-    <div>
+    <div className="min-h-screen bg-[#08131d] text-white">
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
+        <div className="rounded-[36px] border border-white/10 bg-white/5 p-8 shadow-panel backdrop-blur">
           <p className="text-xs uppercase tracking-[0.35em] text-ember">Реквизиты</p>
-          <h1 className="mt-4 text-5xl font-display">Юридическая и платежная информация</h1>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-steel">
+          <h1 className="mt-4 text-5xl font-display text-white">Юридическая и платежная информация</h1>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-mist/75">
             Эту страницу удобно использовать для договоров, счетов, проверки контрагента и размещения обязательной информации на сайте.
           </p>
         </div>
@@ -42,14 +42,14 @@ export default function RequisitesPage() {
           </InfoBlock>
 
           <InfoBlock title="Для связи">
-            <p className="text-sm leading-7 text-steel">
+            <p className="text-sm leading-7 text-mist/75">
               Если вам нужен договор, счет или коммерческое предложение, отправьте запрос через форму на главной странице или напишите напрямую.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <a href={businessInfo.contacts.emailHref} className="rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white">
+              <a href={businessInfo.contacts.emailHref} className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink">
                 Написать на email
               </a>
-              <Link to="/#contact" className="rounded-full border border-ink/10 px-5 py-3 text-sm font-semibold text-ink">
+              <Link to="/#contact" className="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white">
                 Оставить заявку
               </Link>
             </div>
@@ -63,8 +63,8 @@ export default function RequisitesPage() {
 
 function InfoBlock({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="rounded-[32px] border border-black/5 bg-white/80 p-6 shadow-panel">
-      <h2 className="text-2xl font-display">{title}</h2>
+    <section className="rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur">
+      <h2 className="text-2xl font-display text-white">{title}</h2>
       <div className="mt-5 space-y-4">{children}</div>
     </section>
   );
@@ -72,9 +72,9 @@ function InfoBlock({ title, children }: { title: string; children: ReactNode }) 
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-sand px-4 py-4">
-      <div className="text-xs uppercase tracking-[0.25em] text-steel">{label}</div>
-      <div className="mt-2 text-sm leading-7 text-ink">{value}</div>
+    <div className="rounded-2xl border border-white/10 bg-[#102435] px-4 py-4">
+      <div className="text-xs uppercase tracking-[0.25em] text-aqua/80">{label}</div>
+      <div className="mt-2 text-sm leading-7 text-white/85">{value}</div>
     </div>
   );
 }

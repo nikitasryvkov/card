@@ -79,7 +79,7 @@ export default function AdminDashboardLayout() {
                   до документов, рабочих статусов и сопровождения клиентов.
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
+              <div className="grid grid-cols-2 gap-3 text-sm lg:grid-cols-4">
                 {overviewCards.map((card) => (
                   <MetricCard key={card.label} label={card.label} value={card.value} />
                 ))}

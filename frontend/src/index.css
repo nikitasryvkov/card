@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 :root {
-  color: #08131d;
+  color: #f4efe8;
   background:
-    radial-gradient(circle at top left, rgba(68, 211, 199, 0.18), transparent 26%),
-    radial-gradient(circle at right, rgba(244, 106, 58, 0.12), transparent 30%),
-    linear-gradient(180deg, #f7f1e8 0%, #f0e7dc 100%);
+    radial-gradient(circle at top left, rgba(68, 211, 199, 0.16), transparent 26%),
+    radial-gradient(circle at right, rgba(244, 106, 58, 0.14), transparent 30%),
+    linear-gradient(180deg, #07121b 0%, #08131d 55%, #091823 100%);
   font-family: "Manrope", sans-serif;
 }
 
@@ -20,13 +20,13 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
-  color: #08131d;
+  color: #f4efe8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background:
-    radial-gradient(circle at top left, rgba(68, 211, 199, 0.18), transparent 26%),
-    radial-gradient(circle at right, rgba(244, 106, 58, 0.12), transparent 30%),
-    linear-gradient(180deg, #f7f1e8 0%, #f0e7dc 100%);
+    radial-gradient(circle at top left, rgba(68, 211, 199, 0.16), transparent 26%),
+    radial-gradient(circle at right, rgba(244, 106, 58, 0.14), transparent 30%),
+    linear-gradient(180deg, #07121b 0%, #08131d 55%, #091823 100%);
 }
 
 #root {

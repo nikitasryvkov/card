@@ -49,7 +49,7 @@ export default function BusinessExtrasSection() {
               <h3 className="text-2xl font-display text-white">{extra.title}</h3>
               <p className="mt-4 text-sm leading-7 text-mist/75">{extra.description}</p>
 
-              <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+              <ul className="mt-6 grid gap-3 md:grid-cols-3">
                 {extra.bullets.map((bullet) => (
                   <li key={bullet} className="rounded-[22px] border border-white/10 bg-[#102435] px-4 py-4 text-sm text-white/80">
                     {bullet}

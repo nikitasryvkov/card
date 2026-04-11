@@ -41,9 +41,9 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8">
+    <main className="mx-auto flex min-h-screen max-w-7xl items-center px-4 py-16 text-white sm:px-6 lg:px-8">
       <div className="grid w-full gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="rounded-[36px] bg-ink p-8 text-white shadow-panel">
+        <div className="rounded-[36px] border border-white/10 bg-[#0d1d2b] p-8 text-white shadow-panel">
           <p className="text-xs uppercase tracking-[0.35em] text-aqua">Безопасный вход</p>
           <h1 className="mt-4 text-4xl font-display text-white">Доступ к личному кабинету клиента и внутренним рабочим зонам.</h1>
           <p className="mt-4 text-sm leading-7 text-white/70">
@@ -52,9 +52,9 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <form aria-busy={login.isPending} onSubmit={handleSubmit} className="rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
-          <h2 className="text-3xl font-display">Вход</h2>
-          <p className="mt-3 text-sm leading-7 text-steel">
+        <form aria-busy={login.isPending} onSubmit={handleSubmit} className="rounded-[36px] border border-white/10 bg-white/5 p-8 shadow-panel backdrop-blur">
+          <h2 className="text-3xl font-display text-white">Вход</h2>
+          <p className="mt-3 text-sm leading-7 text-mist/75">
             Используйте email, который был указан при регистрации или согласован для доступа в рабочую зону.
           </p>
 
@@ -67,7 +67,7 @@ export default function LoginPage() {
                 placeholder="name@company.ru"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none ring-0 transition focus:border-ink"
+                className="w-full rounded-2xl border border-white/10 bg-[#102435] px-4 py-3 text-white outline-none ring-0 transition placeholder:text-white/35 focus:border-aqua/50"
                 required
                 disabled={login.isPending}
               />
@@ -79,7 +79,7 @@ export default function LoginPage() {
                 placeholder="Ваш пароль"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none ring-0 transition focus:border-ink"
+                className="w-full rounded-2xl border border-white/10 bg-[#102435] px-4 py-3 text-white outline-none ring-0 transition placeholder:text-white/35 focus:border-aqua/50"
                 required
                 disabled={login.isPending}
               />
@@ -94,15 +94,15 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="mt-8 inline-flex rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition hover:bg-panel disabled:opacity-60"
+            className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-mist disabled:opacity-60"
             disabled={login.isPending}
           >
             {login.isPending ? "Входим..." : "Продолжить"}
           </button>
 
-          <p className="mt-6 text-sm leading-7 text-steel">
+          <p className="mt-6 text-sm leading-7 text-mist/75">
             Нет аккаунта?{" "}
-            <Link to="/register" className="font-semibold text-ink underline underline-offset-4">
+            <Link to="/register" className="font-semibold text-white underline underline-offset-4">
               Зарегистрироваться
             </Link>
           </p>
@@ -115,7 +115,7 @@ export default function LoginPage() {
 function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-sm font-semibold text-ink">{label}</span>
+      <span className="mb-2 block text-sm font-semibold text-white">{label}</span>
       {children}
     </label>
   );

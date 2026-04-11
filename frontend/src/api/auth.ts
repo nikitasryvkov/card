@@ -8,20 +8,32 @@ export async function ensureCsrfToken() {
 }
 
 export async function login(payload: LoginPayload) {
-  await ensureCsrfToken();
-  const { data } = await http.post<AuthResponse>("/v1/auth/login", payload);
+  const csrf = await ensureCsrfToken();
+  const { data } = await http.post<AuthResponse>("/v1/auth/login", payload, {
+    headers: {
+      "X-XSRF-TOKEN": csrf.token,
+    },
+  });
   return data;
 }
 
 export async function register(payload: RegisterPayload) {
-  await ensureCsrfToken();
-  const { data } = await http.post<AuthResponse>("/v1/auth/register", payload);
+  const csrf = await ensureCsrfToken();
+  const { data } = await http.post<AuthResponse>("/v1/auth/register", payload, {
+    headers: {
+      "X-XSRF-TOKEN": csrf.token,
+    },
+  });
   return data;
 }
 
 export async function logout() {
-  await ensureCsrfToken();
-  await http.post("/v1/auth/logout");
+  const csrf = await ensureCsrfToken();
+  await http.post("/v1/auth/logout", undefined, {
+    headers: {
+      "X-XSRF-TOKEN": csrf.token,
+    },
+  });
 }
 
 export async function getSession() {

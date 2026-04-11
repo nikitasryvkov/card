@@ -80,7 +80,7 @@ export default function HomePage() {
             <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <p className="text-xs uppercase tracking-[0.35em] text-aqua">Разработка ПО • Архитектура • UX/UI</p>
-                <h1 className="mt-6 max-w-5xl text-5xl font-display leading-[0.92] text-white sm:text-6xl lg:text-7xl">
+                <h1 className="mt-6 max-w-5xl text-4xl font-display leading-[0.96] text-white sm:text-6xl lg:text-7xl">
                   Создаем отказоустойчивые ИТ-решения: от интерфейса до серверной архитектуры.
                 </h1>
                 <p className="mt-6 max-w-3xl text-base leading-8 text-mist/80 sm:text-lg">
@@ -162,7 +162,7 @@ export default function HomePage() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.35em] text-ember">Форматы проектов</p>
-              <h2 className="mt-4 text-4xl font-display text-white">Решения, которые можно запускать и развивать без переписывания с нуля</h2>
+              <h2 className="mt-4 text-3xl font-display text-white sm:text-4xl">Решения, которые можно запускать и развивать без переписывания с нуля</h2>
             </div>
             <p className="max-w-xl text-sm leading-7 text-mist/70">
               Ниже показаны направления работ, с которыми я чаще всего помогаю бизнесу: личные кабинеты,
@@ -220,7 +220,7 @@ export default function HomePage() {
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <p className="text-xs uppercase tracking-[0.35em] text-aqua">Как строится работа</p>
-                <h2 className="mt-4 text-4xl font-display text-white">Предсказуемый процесс вместо хаотичной разработки без опоры на архитектуру</h2>
+                <h2 className="mt-4 text-3xl font-display text-white sm:text-4xl">Предсказуемый процесс вместо хаотичной разработки без опоры на архитектуру</h2>
               </div>
               <p className="max-w-xl text-sm leading-7 text-white/70">
                 На каждом этапе понятно, что уже сделано, какие решения приняты, где находятся риски и
