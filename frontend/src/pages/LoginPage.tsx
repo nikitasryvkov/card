@@ -28,7 +28,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8">
+    <main className="mx-auto flex min-h-screen max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8">
       <div className="grid w-full gap-10 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="rounded-[36px] bg-ink p-8 text-white shadow-panel">
           <p className="text-xs uppercase tracking-[0.35em] text-aqua">Безопасный вход</p>
@@ -39,7 +39,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
+        <form aria-busy={login.isPending} onSubmit={handleSubmit} className="rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
           <h2 className="text-3xl font-display">Вход</h2>
           <p className="mt-3 text-sm leading-7 text-steel">
             Используйте email, который был указан при регистрации или согласован для доступа в рабочую зону.
@@ -49,25 +49,32 @@ export default function LoginPage() {
             <Field label="Email">
               <input
                 type="email"
+                autoComplete="email"
+                spellCheck={false}
+                placeholder="name@company.ru"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none ring-0 transition focus:border-ink"
                 required
+                disabled={login.isPending}
               />
             </Field>
             <Field label="Пароль">
               <input
                 type="password"
+                autoComplete="current-password"
+                placeholder="Ваш пароль"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none ring-0 transition focus:border-ink"
                 required
+                disabled={login.isPending}
               />
             </Field>
           </div>
 
           {login.isError ? (
-            <p className="mt-4 rounded-2xl bg-ember/10 px-4 py-3 text-sm text-ember">
+            <p role="alert" className="mt-4 rounded-2xl bg-ember/10 px-4 py-3 text-sm text-ember">
               Не удалось выполнить вход. Проверьте email, пароль и повторите попытку чуть позже.
             </p>
           ) : null}
@@ -88,7 +95,7 @@ export default function LoginPage() {
           </p>
         </form>
       </div>
-    </div>
+    </main>
   );
 }
 

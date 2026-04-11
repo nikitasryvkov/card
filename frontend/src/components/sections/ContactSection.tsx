@@ -7,10 +7,21 @@ const collaborationFormats = [
   "Рефакторинг и архитектурное усиление",
   "Личный кабинет / CRM / админ-панель",
   "Дизайн и UX-перепаковка сервиса",
-];
+] as const;
+
+type ContactFormState = {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  message: string;
+  consent: boolean;
+};
+
+type ContactFormErrors = Partial<Record<keyof ContactFormState, string>>;
 
 export default function ContactSection() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<ContactFormState>({
     name: "",
     phone: "",
     email: "",
@@ -18,24 +29,109 @@ export default function ContactSection() {
     message: "",
     consent: false,
   });
+  const [errors, setErrors] = useState<ContactFormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notice, setNotice] = useState<{ tone: "info" | "error"; text: string } | null>(null);
+  const [isEmailCopied, setIsEmailCopied] = useState(false);
+
+  function validate(nextForm: ContactFormState) {
+    const nextErrors: ContactFormErrors = {};
+    const trimmedName = nextForm.name.trim();
+    const trimmedPhone = nextForm.phone.trim();
+    const trimmedEmail = nextForm.email.trim();
+    const trimmedMessage = nextForm.message.trim();
+
+    if (trimmedName.length < 2) {
+      nextErrors.name = "Укажите имя, чтобы можно было обратиться к вам в ответе.";
+    }
+
+    if (!trimmedEmail) {
+      nextErrors.email = "Укажите email для обратной связи.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      nextErrors.email = "Похоже, email введен в неверном формате.";
+    }
+
+    if (trimmedPhone && trimmedPhone.replace(/[^\d+]/g, "").length < 7) {
+      nextErrors.phone = "Если указываете телефон, лучше дать номер, по которому реально можно связаться.";
+    }
+
+    if (trimmedMessage.length < 20) {
+      nextErrors.message = "Опишите задачу чуть подробнее: хотя бы в одном-двух предложениях.";
+    }
+
+    if (!nextForm.consent) {
+      nextErrors.consent = "Нужно согласие на обработку персональных данных.";
+    }
+
+    return nextErrors;
+  }
+
+  async function handleCopyEmail() {
+    try {
+      await navigator.clipboard.writeText(businessInfo.contacts.email);
+      setIsEmailCopied(true);
+      window.setTimeout(() => setIsEmailCopied(false), 2500);
+    } catch {
+      setNotice({
+        tone: "error",
+        text: "Не удалось скопировать email автоматически. Можно написать вручную на адрес ниже.",
+      });
+    }
+  }
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    const subject = encodeURIComponent(`Заявка с сайта от ${form.name}`);
+    const nextErrors = validate(form);
+    setErrors(nextErrors);
+    setNotice(null);
+
+    if (Object.keys(nextErrors).length > 0) {
+      setNotice({
+        tone: "error",
+        text: "Проверьте поля формы: нужно заполнить обязательные данные и кратко описать задачу.",
+      });
+      return;
+    }
+
+    const trimmedForm = {
+      ...form,
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      email: form.email.trim(),
+      service: form.service.trim(),
+      message: form.message.trim(),
+    };
+
+    const subject = encodeURIComponent(`Заявка с сайта от ${trimmedForm.name}`);
     const body = encodeURIComponent(
       [
-        `Имя: ${form.name}`,
-        `Телефон: ${form.phone || "не указан"}`,
-        `Email: ${form.email}`,
-        `Формат сотрудничества: ${form.service || "не указан"}`,
+        `Имя: ${trimmedForm.name}`,
+        `Телефон: ${trimmedForm.phone || "не указан"}`,
+        `Email: ${trimmedForm.email}`,
+        `Формат сотрудничества: ${trimmedForm.service || "не указан"}`,
         "",
         "Описание задачи:",
-        form.message,
+        trimmedForm.message,
       ].join("\n"),
     );
 
+    setIsSubmitting(true);
+    setNotice({
+      tone: "info",
+      text: `Сейчас откроется почтовое приложение. Если оно не настроено, напишите напрямую на ${businessInfo.contacts.email}.`,
+    });
+
     window.location.href = `${businessInfo.contacts.emailHref}?subject=${subject}&body=${body}`;
+
+    window.setTimeout(() => {
+      setIsSubmitting(false);
+    }, 1200);
+  }
+
+  function updateField<K extends keyof ContactFormState>(key: K, value: ContactFormState[K]) {
+    setForm((current) => ({ ...current, [key]: value }));
+    setErrors((current) => ({ ...current, [key]: undefined }));
   }
 
   return (
@@ -45,8 +141,7 @@ export default function ContactSection() {
           <p className="text-xs uppercase tracking-[0.35em] text-ember">Контакты</p>
           <h2 className="mt-4 text-4xl font-display text-white">Обсудим задачу, архитектуру и реалистичный план запуска</h2>
           <p className="mt-4 max-w-2xl text-base leading-8 text-mist/75">
-            На первом касании достаточно короткого описания задачи. Дальше можно быстро перейти к созвону, разбору
-            задачи или предварительной смете под ваш формат проекта.
+            Достаточно описать задачу в двух-трех предложениях. В ответ вы получите вариант решения, ориентир по срокам и понятный следующий шаг по запуску проекта.
           </p>
 
           <div className="mt-8 space-y-4">
@@ -62,6 +157,15 @@ export default function ContactSection() {
               <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">Документы и закрывающие материалы</div>
               <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">История обращений в поддержку</div>
               <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">Единый контур взаимодействия с клиентом</div>
+            </div>
+          </div>
+
+          <div className="mt-8 rounded-[28px] border border-white/10 bg-gradient-to-br from-aqua/10 via-white/5 to-ember/10 p-5">
+            <p className="text-xs uppercase tracking-[0.25em] text-aqua/80">После первого контакта</p>
+            <div className="mt-4 space-y-3 text-sm leading-7 text-white/80">
+              <div>Разберем бизнес-задачу и ограничения по срокам.</div>
+              <div>Подскажем формат первого релиза: MVP, кабинет, аудит или дизайн-перепаковка.</div>
+              <div>Согласуем удобный следующий шаг: созвон, смету или техническое уточнение.</div>
             </div>
           </div>
 
@@ -83,20 +187,36 @@ export default function ContactSection() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="rounded-[36px] border border-white/10 bg-[#0d1d2b] p-8 shadow-panel">
+        <form
+          noValidate
+          aria-busy={isSubmitting}
+          onSubmit={handleSubmit}
+          className="rounded-[36px] border border-white/10 bg-[#0d1d2b] p-8 shadow-panel"
+        >
           <p className="text-xs uppercase tracking-[0.35em] text-aqua">Заявка</p>
           <h3 className="mt-4 text-3xl font-display text-white">Кратко опишите задачу</h3>
           <p className="mt-3 text-sm leading-7 text-mist/70">
-            Если проект еще на этапе идеи, это тоже окей. Можно написать бизнес-задачу, а техническую декомпозицию
-            сделаем уже на консультации.
+            Если проект еще на этапе идеи, этого достаточно. Можно описать бизнес-задачу, а техническую декомпозицию и состав первого релиза разберем уже на созвоне.
           </p>
+
+          {notice ? (
+            <p
+              role={notice.tone === "error" ? "alert" : "status"}
+              className={`mt-6 rounded-2xl px-4 py-3 text-sm leading-7 ${
+                notice.tone === "error" ? "bg-ember/10 text-ember" : "bg-aqua/10 text-white/85"
+              }`}
+            >
+              {notice.text}
+            </p>
+          ) : null}
 
           <div className="mt-6 flex flex-wrap gap-3">
             {collaborationFormats.map((item) => (
               <button
                 key={item}
                 type="button"
-                onClick={() => setForm((current) => ({ ...current, service: item }))}
+                aria-pressed={form.service === item}
+                onClick={() => updateField("service", item)}
                 className={`rounded-full border px-4 py-2 text-sm transition ${
                   form.service === item
                     ? "border-aqua/60 bg-aqua/10 text-white"
@@ -109,46 +229,68 @@ export default function ContactSection() {
           </div>
 
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            <Field label="Имя">
+            <Field label="Имя" error={errors.name}>
               <input
+                id="contact-name"
                 required
+                autoComplete="name"
+                placeholder="Как к вам обращаться"
                 value={form.name}
-                onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
+                onChange={(event) => updateField("name", event.target.value)}
+                aria-invalid={Boolean(errors.name)}
                 className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/40 focus:border-aqua/50"
               />
             </Field>
-            <Field label="Телефон">
+
+            <Field label="Телефон" error={errors.phone}>
               <input
+                id="contact-phone"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                placeholder="+7 (___) ___-__-__"
                 value={form.phone}
-                onChange={(event) => setForm((current) => ({ ...current, phone: event.target.value }))}
+                onChange={(event) => updateField("phone", event.target.value)}
+                aria-invalid={Boolean(errors.phone)}
                 className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/40 focus:border-aqua/50"
               />
             </Field>
-            <Field label="Email">
+
+            <Field label="Email" error={errors.email}>
               <input
+                id="contact-email"
                 type="email"
                 required
+                autoComplete="email"
+                spellCheck={false}
+                placeholder="name@company.ru"
                 value={form.email}
-                onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
+                onChange={(event) => updateField("email", event.target.value)}
+                aria-invalid={Boolean(errors.email)}
                 className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/40 focus:border-aqua/50"
               />
             </Field>
+
             <Field label="Формат сотрудничества">
               <input
+                id="contact-service"
                 placeholder="Например: MVP, аудит архитектуры, личный кабинет"
                 value={form.service}
-                onChange={(event) => setForm((current) => ({ ...current, service: event.target.value }))}
+                onChange={(event) => updateField("service", event.target.value)}
                 className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/40 focus:border-aqua/50"
               />
             </Field>
           </div>
 
-          <Field className="mt-5" label="Описание задачи">
+          <Field className="mt-5" label="Описание задачи" error={errors.message}>
             <textarea
+              id="contact-message"
               required
-              value={form.message}
-              onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))}
               rows={6}
+              placeholder="Что нужно сделать, для кого продукт и какой результат вам нужен на первом релизе"
+              value={form.message}
+              onChange={(event) => updateField("message", event.target.value)}
+              aria-invalid={Boolean(errors.message)}
               className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/40 focus:border-aqua/50"
             />
           </Field>
@@ -157,7 +299,8 @@ export default function ContactSection() {
             <input
               type="checkbox"
               checked={form.consent}
-              onChange={(event) => setForm((current) => ({ ...current, consent: event.target.checked }))}
+              onChange={(event) => updateField("consent", event.target.checked)}
+              aria-invalid={Boolean(errors.consent)}
               required
               className="mt-1 h-4 w-4 rounded border-white/20 bg-transparent"
             />
@@ -169,10 +312,15 @@ export default function ContactSection() {
               .
             </span>
           </label>
+          {errors.consent ? <FieldError>{errors.consent}</FieldError> : null}
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <button type="submit" className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-mist">
-              Отправить заявку
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-mist disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isSubmitting ? "Готовим письмо..." : "Получить разбор задачи"}
             </button>
             <a
               href={businessInfo.contacts.phoneHref}
@@ -180,6 +328,13 @@ export default function ContactSection() {
             >
               Позвонить
             </a>
+            <button
+              type="button"
+              onClick={handleCopyEmail}
+              className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5"
+            >
+              {isEmailCopied ? "Email скопирован" : "Скопировать email"}
+            </button>
           </div>
         </form>
       </div>
@@ -191,16 +346,27 @@ function Field({
   label,
   children,
   className = "",
+  error,
 }: {
   label: string;
   children: ReactNode;
   className?: string;
+  error?: string;
 }) {
   return (
     <label className={`block ${className}`.trim()}>
       <span className="mb-2 block text-sm font-semibold text-white">{label}</span>
       {children}
+      {error ? <FieldError>{error}</FieldError> : null}
     </label>
+  );
+}
+
+function FieldError({ children }: { children: ReactNode }) {
+  return (
+    <span role="alert" className="mt-2 block text-sm text-amber-200">
+      {children}
+    </span>
   );
 }
 

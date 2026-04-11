@@ -9,11 +9,13 @@ const calculatorOptions = [
   { id: "ai", label: "AI-автоматизация внутри продукта", price: 80000, weeks: 2 },
 ] as const;
 
+type CalculatorOptionId = (typeof calculatorOptions)[number]["id"];
+
 const basePrice = 220000;
 const baseWeeks = 3;
 
 export default function MvpCalculatorSection() {
-  const [selected, setSelected] = useState<string[]>(["account", "admin"]);
+  const [selected, setSelected] = useState<CalculatorOptionId[]>(["account", "admin"]);
 
   const selectedOptions = calculatorOptions.filter((option) => selected.includes(option.id));
   const extraPrice = selectedOptions.reduce((sum, option) => sum + option.price, 0);
@@ -26,7 +28,7 @@ export default function MvpCalculatorSection() {
   const packageLabel =
     total >= 430000 ? "Платформенный MVP" : total >= 320000 ? "Расширенный MVP" : "Базовый MVP";
 
-  function toggleOption(optionId: string) {
+  function toggleOption(optionId: CalculatorOptionId) {
     setSelected((current) => (current.includes(optionId) ? current.filter((item) => item !== optionId) : [...current, optionId]));
   }
 
@@ -36,10 +38,10 @@ export default function MvpCalculatorSection() {
         <div className="grid gap-0 lg:grid-cols-[1fr_0.9fr]">
           <div className="border-b border-white/10 p-8 lg:border-b-0 lg:border-r lg:p-10">
             <p className="text-xs uppercase tracking-[0.35em] text-aqua">Калькулятор стоимости MVP</p>
-            <h2 className="mt-4 text-4xl font-display text-white">Помогает быстро понять порядок бюджета до стартового разбора задачи</h2>
+            <h2 className="mt-4 text-4xl font-display text-white">Показывает порядок бюджета до первого созвона и технического разбора</h2>
             <p className="mt-4 max-w-2xl text-base leading-8 text-mist/75">
-              Это не публичный прайс-лист, а ориентир для первой консультации. После аналитики смета уточняется по
-              ролям, интеграциям, рискам и требованиям к безопасности.
+              Это не публичный прайс-лист, а ориентир для проекта с backend, интерфейсом и базовой инфраструктурой.
+              После короткого разбора смета уточняется по ролям, интеграциям, рискам и требованиям к безопасности.
             </p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -50,6 +52,7 @@ export default function MvpCalculatorSection() {
                   <button
                     key={option.id}
                     type="button"
+                    aria-pressed={isSelected}
                     onClick={() => toggleOption(option.id)}
                     className={`rounded-[24px] border px-5 py-5 text-left transition ${
                       isSelected
@@ -66,7 +69,7 @@ export default function MvpCalculatorSection() {
           </div>
 
           <div className="p-8 lg:p-10">
-            <div className="rounded-[32px] border border-white/10 bg-white/5 p-6">
+            <div aria-live="polite" aria-atomic="true" className="rounded-[32px] border border-white/10 bg-white/5 p-6">
               <div className="text-xs uppercase tracking-[0.35em] text-amber-200">Предварительная оценка</div>
               <div className="mt-4 text-4xl font-display text-white">
                 {formatCurrency(minPrice)} — {formatCurrency(maxPrice)}
@@ -81,10 +84,19 @@ export default function MvpCalculatorSection() {
             <div className="mt-6 rounded-[32px] border border-white/10 bg-[#102435] p-6">
               <div className="text-xs uppercase tracking-[0.3em] text-aqua/80">Что входит в расчет</div>
               <ul className="mt-4 space-y-3 text-sm leading-7 text-white/80">
-                <li>Архитектурная проработка и декомпозиция MVP</li>
-                <li>Backend и frontend на production-ready стеке</li>
-                <li>Адаптивный интерфейс и базовый релизный контур</li>
-                <li>Подготовка к масштабированию и дальнейшим итерациям</li>
+                <li>Архитектурная проработка и декомпозиция первого релиза</li>
+                <li>Backend, frontend и API на production-ready стеке</li>
+                <li>Адаптивный интерфейс и базовый контур публикации</li>
+                <li>Подготовка к следующим итерациям без переписывания с нуля</li>
+              </ul>
+            </div>
+
+            <div className="mt-6 rounded-[32px] border border-white/10 bg-white/5 p-6">
+              <div className="text-xs uppercase tracking-[0.3em] text-amber-200">Что вы получите после созвона</div>
+              <ul className="mt-4 space-y-3 text-sm leading-7 text-white/80">
+                <li>Уточненную вилку бюджета под ваш сценарий</li>
+                <li>Состав первого релиза и список ключевых модулей</li>
+                <li>Понимание по срокам, рискам и следующему шагу</li>
               </ul>
             </div>
 
@@ -92,7 +104,7 @@ export default function MvpCalculatorSection() {
               href="#contact"
               className="mt-6 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-mist"
             >
-              Запросить точную смету
+              Запросить точную оценку
             </a>
           </div>
         </div>

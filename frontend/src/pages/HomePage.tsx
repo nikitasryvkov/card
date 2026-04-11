@@ -9,15 +9,15 @@ import Services from "../components/sections/Services";
 import TechStackSection from "../components/sections/TechStackSection";
 
 const heroDeliverables = [
-  "MVP, личные кабинеты и внутренние сервисы для бизнеса",
-  "Надежный backend на Java и современный frontend на React",
-  "Запуск на сервере, резервное копирование и поддержка после релиза",
+  "Работающий MVP, кабинет клиента или внутренняя система под ваши процессы",
+  "Backend на Java, интерфейс на React, база данных, роли доступа и API",
+  "Публикация на сервере, документация и понятный план развития после релиза",
 ];
 
 const operatingModel = [
-  "Проектирование backend-архитектуры, API и безопасного контура доступа",
-  "Личные кабинеты, CRM, административные панели и интерфейсы для команды",
-  "Развертывание на сервере, настройка Nginx, SSL, бэкапов и сопровождения",
+  "Архитектура backend, API и контур безопасности под реальные бизнес-сценарии",
+  "Личные кабинеты, CRM, административные панели и интерфейсы для ежедневной работы команды",
+  "Публикация на сервере, Nginx, SSL, бэкапы и сопровождение после запуска",
 ];
 
 const processSteps = [
@@ -84,9 +84,10 @@ export default function HomePage() {
                   Создаем отказоустойчивые ИТ-решения: от интерфейса до серверной архитектуры.
                 </h1>
                 <p className="mt-6 max-w-3xl text-base leading-8 text-mist/80 sm:text-lg">
-                  Полный цикл разработки ПО, проектирование высоконагруженных систем и современный UX/UI
-                  дизайн. Помогаю запустить MVP, личный кабинет, внутренний сервис или корпоративную
-                  платформу так, чтобы продукт можно было спокойно развивать после первого релиза.
+                  Вы получаете не просто разработку, а готовую цифровую систему: backend на Java,
+                  интерфейс на React, базу данных, роли доступа и публикацию на сервере. Подходит для
+                  MVP, личных кабинетов, CRM и внутренних сервисов, которые нужно запускать без
+                  технического хаоса и переписывания после первого релиза.
                 </p>
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -121,7 +122,7 @@ export default function HomePage() {
                 <div className="absolute -bottom-8 right-0 h-36 w-36 rounded-full bg-ember/20 blur-3xl" />
 
                 <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur-xl">
-                  <div className="flex items-center justify-between gap-4 rounded-[28px] border border-white/10 bg-white/5 px-5 py-4">
+                  <div className="flex flex-col items-start gap-4 rounded-[28px] border border-white/10 bg-white/5 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <div className="text-xs uppercase tracking-[0.3em] text-aqua">Под ключ</div>
                       <div className="mt-2 text-2xl font-display text-white">От идеи и MVP до релиза на сервере</div>
@@ -143,9 +144,9 @@ export default function HomePage() {
                   <div className="mt-6 rounded-[28px] border border-emerald-300/20 bg-emerald-300/10 px-5 py-5">
                     <div className="text-xs uppercase tracking-[0.3em] text-emerald-200">Результат для бизнеса</div>
                     <p className="mt-3 text-sm leading-7 text-white/80">
-                      Вы получаете не только разработку, но и понятный рабочий контур: архитектуру,
-                      интерфейсы, серверную публикацию, документацию и дальнейшее сопровождение без
-                      передачи проекта между несколькими подрядчиками.
+                      На выходе у вас рабочий код, задеплоенный сервис, документация по API и понятный
+                      план развития продукта. Это снижает риск потери контекста, упрощает дальнейшие
+                      доработки и ускоряет запуск следующих функций.
                     </p>
                   </div>
                 </div>

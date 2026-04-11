@@ -33,30 +33,37 @@ export default function AdminDashboardLayout() {
             </p>
           </div>
 
-          <nav className="mt-10 space-y-3">
-            {menu.map((item) => (
-              <div
-                key={item.label}
-                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur"
-              >
-                <div className="text-sm font-semibold">{item.label}</div>
-                <div className="mt-1 text-xs text-white/55">{item.value}</div>
-              </div>
-            ))}
-          </nav>
+          <section className="mt-10" aria-labelledby="admin-sections-title">
+            <h2 id="admin-sections-title" className="sr-only">
+              Разделы административной панели
+            </h2>
+            <ul className="space-y-3">
+              {menu.map((item) => (
+                <li
+                  key={item.label}
+                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur"
+                >
+                  <div className="text-sm font-semibold">{item.label}</div>
+                  <div className="mt-1 text-xs text-white/55">{item.value}</div>
+                </li>
+              ))}
+            </ul>
+          </section>
 
           <div className="mt-10 rounded-3xl border border-ember/30 bg-ember/10 p-4">
             <div className="text-sm font-semibold text-white">Вы вошли как</div>
             <div className="mt-1 text-lg font-display text-white">{session?.fullName ?? "Администратор"}</div>
             <div className="text-sm text-white/60">{session?.email ?? "Защищенный доступ администратора"}</div>
             <button
+              type="button"
+              disabled={logout.isPending}
               className="mt-4 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:bg-sand"
               onClick={async () => {
                 await logout.mutateAsync();
                 navigate("/login", { replace: true });
               }}
             >
-              Выйти
+              {logout.isPending ? "Выходим..." : "Выйти"}
             </button>
           </div>
         </aside>

@@ -31,7 +31,7 @@ export default function ClientDashboardPage() {
   const logout = useLogout();
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="rounded-[36px] bg-ink p-8 text-white shadow-panel">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -43,13 +43,15 @@ export default function ClientDashboardPage() {
             </p>
           </div>
           <button
+            type="button"
+            disabled={logout.isPending}
             className="inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink"
             onClick={async () => {
               await logout.mutateAsync();
               navigate("/", { replace: true });
             }}
           >
-            Выйти
+            {logout.isPending ? "Выходим..." : "Выйти"}
           </button>
         </div>
       </div>
@@ -103,6 +105,6 @@ export default function ClientDashboardPage() {
           </section>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -32,8 +32,8 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-4xl items-center px-4 py-16 sm:px-6 lg:px-8">
-      <form onSubmit={handleSubmit} className="w-full rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
+    <main className="mx-auto flex min-h-screen max-w-4xl items-center px-4 py-16 sm:px-6 lg:px-8">
+      <form aria-busy={register.isPending} onSubmit={handleSubmit} className="w-full rounded-[36px] border border-black/5 bg-white/80 p-8 shadow-panel">
         <p className="text-xs uppercase tracking-[0.35em] text-ember">Регистрация</p>
         <h1 className="mt-4 text-4xl font-display">Создайте доступ в личный кабинет клиента.</h1>
         <p className="mt-4 max-w-2xl text-sm leading-7 text-steel">
@@ -44,42 +44,60 @@ export default function RegisterPage() {
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           <Field label="Имя и фамилия">
             <input
+              autoComplete="name"
+              placeholder="Например: Никита Срывков"
               value={form.fullName}
               onChange={(event) => setForm((current) => ({ ...current, fullName: event.target.value }))}
               className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none transition focus:border-ink"
               required
+              disabled={register.isPending}
             />
           </Field>
           <Field label="Компания">
             <input
+              autoComplete="organization"
+              placeholder="Если есть юридическое лицо или бренд"
               value={form.companyName}
               onChange={(event) => setForm((current) => ({ ...current, companyName: event.target.value }))}
               className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none transition focus:border-ink"
+              disabled={register.isPending}
             />
           </Field>
           <Field label="Email">
             <input
               type="email"
+              autoComplete="email"
+              spellCheck={false}
+              placeholder="name@company.ru"
               value={form.email}
               onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
               className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none transition focus:border-ink"
               required
+              disabled={register.isPending}
             />
           </Field>
           <Field label="Пароль">
             <input
+              id="register-password"
               type="password"
+              autoComplete="new-password"
+              placeholder="Минимум 8 символов"
+              aria-describedby="register-password-hint"
               value={form.password}
               onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
               className="w-full rounded-2xl border border-black/10 bg-sand px-4 py-3 outline-none transition focus:border-ink"
               minLength={8}
               required
+              disabled={register.isPending}
             />
+            <span id="register-password-hint" className="mt-2 block text-xs leading-6 text-steel">
+              Лучше использовать пароль длиной от 8 символов с буквами и цифрами.
+            </span>
           </Field>
         </div>
 
         {register.isError ? (
-          <p className="mt-4 rounded-2xl bg-ember/10 px-4 py-3 text-sm text-ember">
+          <p role="alert" className="mt-4 rounded-2xl bg-ember/10 px-4 py-3 text-sm text-ember">
             Не удалось завершить регистрацию. Проверьте данные и повторите попытку чуть позже.
           </p>
         ) : null}
@@ -92,14 +110,14 @@ export default function RegisterPage() {
           {register.isPending ? "Создаем аккаунт..." : "Создать аккаунт"}
         </button>
 
-        <p className="mt-6 text-sm leading-7 text-steel">
-          Уже есть аккаунт?{" "}
-          <Link to="/login" className="font-semibold text-ink underline underline-offset-4">
-            Войти
-          </Link>
-        </p>
-      </form>
-    </div>
+          <p className="mt-6 text-sm leading-7 text-steel">
+            Уже есть аккаунт?{" "}
+            <Link to="/login" className="font-semibold text-ink underline underline-offset-4">
+              Войти
+            </Link>
+          </p>
+        </form>
+    </main>
   );
 }
 
