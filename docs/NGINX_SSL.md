@@ -19,7 +19,6 @@ This project now supports a two-stage Nginx setup:
 Point these DNS records to your server IP:
 
 - `@` -> server IPv4
-- `www` -> server IPv4
 
 ## 2. Prepare production env
 
@@ -52,7 +51,7 @@ Run Certbot:
 ```bash
 docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml run --rm certbot \
   certonly --webroot -w /var/www/certbot \
-  -d ${DOMAIN} -d www.${DOMAIN} \
+  -d ${DOMAIN} \
   --email ${LETSENCRYPT_EMAIL} \
   --agree-tos --no-eff-email
 ```
@@ -78,5 +77,4 @@ Recommended host cron entry:
 ## Notes
 
 - Port 80 must remain reachable from the internet for Let's Encrypt validation.
-- If you do not want `www`, remove `-d www.${DOMAIN}` from the Certbot command and point only the root domain in DNS.
 - The base compose file still exposes PostgreSQL on `5432`; for stricter production hardening, remove that mapping or restrict it with firewall rules.

@@ -3,14 +3,14 @@ set -eu
 
 if [ -n "${DOMAIN:-}" ]; then
     export NGINX_PRIMARY_DOMAIN="${DOMAIN}"
-    export NGINX_SERVER_NAME="${DOMAIN} www.${DOMAIN}"
+    export NGINX_SERVER_NAME="${DOMAIN}"
 else
     export NGINX_PRIMARY_DOMAIN="localhost"
     export NGINX_SERVER_NAME="_"
 fi
 
-HTTP_TEMPLATE="/etc/nginx/templates/http.conf.template"
-HTTPS_TEMPLATE="/etc/nginx/templates/https.conf.template"
+HTTP_TEMPLATE="/opt/nginx/templates/http.conf.template"
+HTTPS_TEMPLATE="/opt/nginx/templates/https.conf.template"
 TARGET_CONFIG="/etc/nginx/conf.d/default.conf"
 
 if [ -f "/etc/letsencrypt/live/${NGINX_PRIMARY_DOMAIN}/fullchain.pem" ] && [ -f "/etc/letsencrypt/live/${NGINX_PRIMARY_DOMAIN}/privkey.pem" ]; then

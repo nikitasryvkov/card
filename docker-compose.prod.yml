@@ -1,7 +1,7 @@
 services:
   app:
     environment:
-      APP_ALLOWED_ORIGINS: https://${DOMAIN},https://www.${DOMAIN}
+      APP_ALLOWED_ORIGINS: https://${DOMAIN}
 
   nginx:
     environment:
