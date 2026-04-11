@@ -1,5 +1,6 @@
 import { type ReactNode, FormEvent, startTransition, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { readApiError } from "../api/errors";
 import { useLogin, useSession } from "../modules/auth/auth-hooks";
 
 export default function LoginPage() {
@@ -8,6 +9,7 @@ export default function LoginPage() {
   const login = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [formError, setFormError] = useState("");
 
   useEffect(() => {
     if (!session) {
@@ -21,10 +23,21 @@ export default function LoginPage() {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    const response = await login.mutateAsync({ email, password });
-    startTransition(() => {
-      navigate(response.role === "ROLE_ADMIN" ? "/admin" : "/dashboard", { replace: true });
-    });
+    setFormError("");
+
+    try {
+      const response = await login.mutateAsync({ email: email.trim().toLowerCase(), password });
+      startTransition(() => {
+        navigate(response.role === "ROLE_ADMIN" ? "/admin" : "/dashboard", { replace: true });
+      });
+    } catch (error) {
+      const apiError = readApiError(error);
+      setFormError(
+        apiError?.status === 429
+          ? "Слишком много попыток входа. Подождите немного и попробуйте снова."
+          : apiError?.message || "Не удалось выполнить вход. Проверьте email, пароль и повторите попытку чуть позже.",
+      );
+    }
   }
 
   return (
@@ -73,9 +86,9 @@ export default function LoginPage() {
             </Field>
           </div>
 
-          {login.isError ? (
+          {formError ? (
             <p role="alert" className="mt-4 rounded-2xl bg-ember/10 px-4 py-3 text-sm text-ember">
-              Не удалось выполнить вход. Проверьте email, пароль и повторите попытку чуть позже.
+              {formError}
             </p>
           ) : null}
 
