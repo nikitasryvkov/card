@@ -4,7 +4,7 @@ spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/it_agency}
     username: ${SPRING_DATASOURCE_USERNAME:it_agency}
-    password: ${SPRING_DATASOURCE_PASSWORD:it_agency}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: validate
@@ -15,6 +15,9 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+  threads:
+    virtual:
+      enabled: true
   mail:
     host: ${SPRING_MAIL_HOST:localhost}
     port: ${SPRING_MAIL_PORT:1025}
@@ -30,34 +33,44 @@ spring:
 server:
   port: ${SERVER_PORT:8080}
   forward-headers-strategy: framework
+  shutdown: graceful
 
 springdoc:
   api-docs:
     path: /v3/api-docs
+    enabled: ${APP_DOCS_ENABLED:false}
   swagger-ui:
     path: /swagger-ui.html
+    enabled: ${APP_DOCS_ENABLED:false}
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,loggers
+        include: health,info,metrics,prometheus
   endpoint:
     health:
       probes:
         enabled: true
-      show-details: always
+      show-details: when_authorized
 
 logging:
   level:
     root: INFO
     com.itagency.platform: INFO
     org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %5p [%X{requestId:-}] [%t] %logger{36} - %msg%n"
 
 app:
   cors:
     allowed-origins: ${APP_ALLOWED_ORIGINS:http://localhost:5173,http://localhost}
   security:
     jwt:
-      secret: ${APP_JWT_SECRET:Zm9yLWRldmVsb3BtZW50LW9ubHktcmVwbGFjZS1iZWZvcmUtcHJvZHVjdGlvbi11c2U=}
+      secret: ${APP_JWT_SECRET}
       expiration-hours: ${APP_JWT_EXPIRATION_HOURS:12}
+      issuer: ${APP_JWT_ISSUER:agency-platform}
+    cookie:
+      name: ${APP_AUTH_COOKIE_NAME:agency_access_token}
+      path: ${APP_AUTH_COOKIE_PATH:/}
+      same-site: ${APP_AUTH_COOKIE_SAME_SITE:Strict}

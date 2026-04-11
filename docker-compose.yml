@@ -2,16 +2,17 @@ services:
   db:
     image: postgres:16-alpine
     container_name: it-agency-db
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: it_agency
-      POSTGRES_USER: it_agency
-      POSTGRES_PASSWORD: it_agency
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: ${POSTGRES_DB:-it_agency}
+      POSTGRES_USER: ${POSTGRES_USER:-it_agency}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    expose:
+      - "5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U it_agency -d it_agency"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-it_agency} -d ${POSTGRES_DB:-it_agency}"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -20,28 +21,58 @@ services:
     build:
       context: ./backend
     container_name: it-agency-app
+    restart: unless-stopped
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/it_agency
-      SPRING_DATASOURCE_USERNAME: it_agency
-      SPRING_DATASOURCE_PASSWORD: it_agency
-      APP_ALLOWED_ORIGINS: http://localhost
-      APP_JWT_SECRET: Zm9yLWRldmVsb3BtZW50LW9ubHktcmVwbGFjZS1iZWZvcmUtcHJvZHVjdGlvbi11c2U=
-      APP_JWT_EXPIRATION_HOURS: 12
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-it_agency}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-it_agency}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      APP_ALLOWED_ORIGINS: ${APP_ALLOWED_ORIGINS:-http://localhost:5173,http://localhost}
+      APP_JWT_SECRET: ${APP_JWT_SECRET:?APP_JWT_SECRET is required}
+      APP_JWT_EXPIRATION_HOURS: ${APP_JWT_EXPIRATION_HOURS:-12}
+      APP_JWT_ISSUER: ${APP_JWT_ISSUER:-agency-platform}
+      APP_DOCS_ENABLED: ${APP_DOCS_ENABLED:-false}
     depends_on:
       db:
         condition: service_healthy
     expose:
       - "8080"
+    ports:
+      - "127.0.0.1:8080:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/actuator/health/readiness >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
   nginx:
     build:
       context: .
       dockerfile: infra/nginx/Dockerfile
     container_name: it-agency-nginx
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     depends_on:
-      - app
+      app:
+        condition: service_healthy
     ports:
-      - "80:80"
+      - "80:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/healthz >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
 
 volumes:
   postgres_data:

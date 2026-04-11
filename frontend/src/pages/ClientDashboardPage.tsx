@@ -1,4 +1,5 @@
-import { clearSession, getStoredSession } from "../modules/auth/auth-storage";
+import { useNavigate } from "react-router-dom";
+import { useLogout, useSession } from "../modules/auth/auth-hooks";
 
 const projects = [
   { name: "Редизайн сайта и структуры услуг", status: "В работе", milestone: "Авторизация и API портфолио", progress: "72%" },
@@ -13,7 +14,9 @@ const tickets = [
 const documents = ["Договор на оказание услуг.pdf", "Гайд по фирменному стилю.fig", "Материалы спринта 03.zip"];
 
 export default function ClientDashboardPage() {
-  const session = getStoredSession();
+  const navigate = useNavigate();
+  const { data: session } = useSession();
+  const logout = useLogout();
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
@@ -21,16 +24,16 @@ export default function ClientDashboardPage() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.35em] text-aqua">Кабинет клиента</p>
-            <h1 className="mt-4 text-4xl font-display text-white">С возвращением, {session?.user.fullName ?? "клиент"}.</h1>
+            <h1 className="mt-4 text-4xl font-display text-white">С возвращением, {session?.fullName ?? "клиент"}.</h1>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">
               Эта защищенная зона предназначена для статусов проекта, доступа к документам, отслеживания счетов и общения с поддержкой.
             </p>
           </div>
           <button
             className="inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink"
-            onClick={() => {
-              clearSession();
-              window.location.href = "/";
+            onClick={async () => {
+              await logout.mutateAsync();
+              navigate("/", { replace: true });
             }}
           >
             Выйти

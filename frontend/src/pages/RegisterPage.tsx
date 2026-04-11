@@ -1,9 +1,10 @@
-import { type ReactNode, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRegister } from "../modules/auth/auth-hooks";
+import { type ReactNode, FormEvent, startTransition, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useRegister, useSession } from "../modules/auth/auth-hooks";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
+  const { data: session } = useSession();
   const register = useRegister();
   const [form, setForm] = useState({
     fullName: "",
@@ -12,10 +13,22 @@ export default function RegisterPage() {
     password: "",
   });
 
+  useEffect(() => {
+    if (!session) {
+      return;
+    }
+
+    startTransition(() => {
+      navigate(session.role === "ROLE_ADMIN" ? "/admin" : "/dashboard", { replace: true });
+    });
+  }, [navigate, session]);
+
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    await register.mutateAsync(form);
-    navigate("/dashboard");
+    const response = await register.mutateAsync(form);
+    startTransition(() => {
+      navigate(response.role === "ROLE_ADMIN" ? "/admin" : "/dashboard", { replace: true });
+    });
   }
 
   return (
@@ -66,7 +79,7 @@ export default function RegisterPage() {
 
         {register.isError ? (
           <p className="mt-4 rounded-2xl bg-ember/10 px-4 py-3 text-sm text-ember">
-            Не удалось зарегистрироваться. Проверьте доступность backend и не занят ли этот email.
+            Не удалось завершить регистрацию. Проверьте данные и повторите попытку чуть позже.
           </p>
         ) : null}
 
@@ -77,6 +90,13 @@ export default function RegisterPage() {
         >
           {register.isPending ? "Создаем аккаунт..." : "Создать аккаунт"}
         </button>
+
+        <p className="mt-6 text-sm leading-7 text-steel">
+          Уже есть аккаунт?{" "}
+          <Link to="/login" className="font-semibold text-ink underline underline-offset-4">
+            Войти
+          </Link>
+        </p>
       </form>
     </div>
   );

@@ -1,28 +1,34 @@
 const services = [
   {
-    title: "Разработка цифровых продуктов",
-    eyebrow: "Разработка",
+    title: "Разработка ПО",
+    code: "62.01",
     description:
-      "Проектирую и запускаю устойчивые сервисы, внутренние кабинеты и клиентские продукты с понятной архитектурой и запасом на рост.",
-    bullets: ["Аналитика и проектирование MVP", "Java + React fullstack-разработка", "API-first подход и усиление DevOps"],
-    accent: "from-ember/20 to-ember/5",
+      "Создание сложных систем: backend на Java и Spring Boot, frontend на React, проектирование API, микросервисы, личные кабинеты и MVP для стартапов и B2B-проектов.",
+    bullets: ["Backend на Java 21 + Spring Boot", "React-интерфейсы и клиентские кабинеты", "MVP, API-интеграции и развитие до production"],
+    accent: "from-ember/20 via-ember/5 to-transparent",
   },
   {
-    title: "UX/UI и продуктовый дизайн",
-    eyebrow: "Дизайн",
+    title: "ИТ-консалтинг",
+    code: "62.02.1",
     description:
-      "От продающих лендингов до сложных интерфейсов: дизайн строится вокруг пользы, конверсии и удобства для пользователей.",
-    bullets: ["Дизайн-системы под бренд", "Лендинги с высокой конверсией", "Доступные кабинеты и рабочие сценарии"],
-    accent: "from-aqua/20 to-aqua/5",
+      "Технический аудит, выбор стека, проектирование баз данных и контуров безопасности, подготовка инфраструктуры и оптимизация процессов через автоматизацию.",
+    bullets: ["Аудит текущей архитектуры и рисков", "Проектирование БД, сервисов и ролевой модели", "Автоматизация внутренних процессов и подготовка roadmap"],
+    accent: "from-aqua/20 via-aqua/5 to-transparent",
   },
   {
-    title: "CRM, поддержка и автоматизация",
-    eyebrow: "Операции",
+    title: "Дизайн",
+    code: "74.10",
     description:
-      "Связываю сайт с операционной частью бизнеса: заявками, клиентским кабинетом, отчетностью и автоматизацией процессов.",
-    bullets: ["Воронки лидов и тикетинг", "Архитектура клиентского кабинета", "Инвойсы по этапам и статусы проектов"],
-    accent: "from-panel/15 to-white/30",
+      "UX/UI и продуктовый дизайн: прототипы, дизайн-системы и интерфейсы, в которых удобно работать. Эстетика сразу проверяется на техническую реализуемость.",
+    bullets: ["Прототипы и пользовательские сценарии", "Дизайн-системы и UI-kit под продукт", "Интерфейсы, где дизайн не конфликтует с разработкой"],
+    accent: "from-white/20 via-white/5 to-transparent",
   },
+];
+
+const serviceBenefits = [
+  "От одного подрядчика вы получаете и код, и архитектуру, и UX/UI.",
+  "Сайт, кабинет и административные процессы проектируются как единая система.",
+  "AI-возможности и инфраструктура подключаются как развитие продукта, а не как отдельный хаотичный слой.",
 ];
 
 export default function Services() {
@@ -31,19 +37,22 @@ export default function Services() {
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
         <div>
           <p className="text-xs uppercase tracking-[0.35em] text-ember">Услуги</p>
-          <h2 className="mt-4 text-4xl font-display leading-tight sm:text-5xl">
-            Делаю не просто сайт, а цифровую систему, которая помогает бизнесу работать и продавать.
+          <h2 className="mt-4 text-4xl font-display leading-tight text-white sm:text-5xl">
+            Три направления, которые закрывают разработку, архитектуру и дизайн без разрыва между этапами.
           </h2>
-          <p className="mt-5 max-w-xl text-base leading-8 text-steel">
-            Публичная часть, CRM, кабинет клиента, поддержка и финансовые процессы проектируются как единый продукт, а не как набор разрозненных модулей.
+          <p className="mt-5 max-w-xl text-base leading-8 text-mist/75">
+            Это особенно важно для B2B-продуктов, клиентских кабинетов, внутренних систем и MVP, где слабое место
+            обычно появляется не в коде, а на стыке решений.
           </p>
         </div>
 
-        <div className="rounded-[32px] border border-black/5 bg-white/70 p-6 shadow-panel backdrop-blur">
+        <div className="rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur">
           <div className="grid gap-4 sm:grid-cols-3">
-            <Stat label="Средний старт" value="7 дней" />
-            <Stat label="Готовность к запуску" value="92%" />
-            <Stat label="Продление поддержки" value="84%" />
+            {serviceBenefits.map((item) => (
+              <div key={item} className="rounded-2xl border border-white/10 bg-[#102435] px-4 py-5 text-sm leading-7 text-white/80">
+                {item}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -52,16 +61,16 @@ export default function Services() {
         {services.map((service) => (
           <article
             key={service.title}
-            className={`group relative overflow-hidden rounded-[32px] border border-black/5 bg-gradient-to-br ${service.accent} bg-white/80 p-7 shadow-panel transition duration-300 hover:-translate-y-1`}
+            className={`relative overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br ${service.accent} bg-white/5 p-7 shadow-panel backdrop-blur`}
           >
-            <div className="absolute right-5 top-5 h-20 w-20 rounded-full bg-white/50 blur-2xl transition duration-300 group-hover:scale-125" />
-            <p className="relative text-xs uppercase tracking-[0.35em] text-steel">{service.eyebrow}</p>
-            <h3 className="relative mt-4 text-2xl font-display">{service.title}</h3>
-            <p className="relative mt-4 text-sm leading-7 text-steel">{service.description}</p>
+            <div className="absolute -right-6 top-4 h-28 w-28 rounded-full bg-white/10 blur-3xl" />
+            <p className="relative text-xs uppercase tracking-[0.35em] text-aqua/80">ОКВЭД {service.code}</p>
+            <h3 className="relative mt-4 text-2xl font-display text-white">{service.title}</h3>
+            <p className="relative mt-4 text-sm leading-7 text-mist/75">{service.description}</p>
 
             <ul className="relative mt-6 space-y-3">
               {service.bullets.map((bullet) => (
-                <li key={bullet} className="flex items-start gap-3 text-sm text-ink">
+                <li key={bullet} className="flex items-start gap-3 text-sm text-white/80">
                   <span className="mt-1.5 h-2.5 w-2.5 rounded-full bg-ember" />
                   <span>{bullet}</span>
                 </li>
@@ -71,14 +80,5 @@ export default function Services() {
         ))}
       </div>
     </section>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl bg-sand px-4 py-5 text-center">
-      <div className="text-xs uppercase tracking-[0.25em] text-steel">{label}</div>
-      <div className="mt-3 font-display text-2xl text-ink">{value}</div>
-    </div>
   );
 }

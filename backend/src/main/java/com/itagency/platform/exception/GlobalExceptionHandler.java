@@ -44,7 +44,10 @@ public class GlobalExceptionHandler {
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrorResponse handleBadRequest(Exception exception, HttpServletRequest request) {
-        return buildResponse(HttpStatus.BAD_REQUEST, exception.getMessage(), request, Map.of());
+        String message = exception instanceof BadCredentialsException
+                ? "Invalid email or password."
+                : exception.getMessage();
+        return buildResponse(HttpStatus.BAD_REQUEST, message, request, Map.of());
     }
 
     @ExceptionHandler(AccessDeniedException.class)

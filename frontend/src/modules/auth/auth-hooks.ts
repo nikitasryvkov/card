@@ -1,25 +1,47 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { login, register } from "../../api/auth";
-import { persistSession, getStoredSession } from "./auth-storage";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getSession, login, logout, register } from "../../api/auth";
+
+export const sessionQueryKey = ["session"] as const;
 
 export function useSession() {
   return useQuery({
-    queryKey: ["session"],
-    queryFn: async () => getStoredSession(),
-    initialData: getStoredSession,
+    queryKey: sessionQueryKey,
+    queryFn: getSession,
+    retry: false,
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
   });
 }
 
 export function useLogin() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: login,
-    onSuccess: persistSession,
+    onSuccess: (session) => {
+      queryClient.setQueryData(sessionQueryKey, session);
+    },
   });
 }
 
 export function useRegister() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: register,
-    onSuccess: persistSession,
+    onSuccess: (session) => {
+      queryClient.setQueryData(sessionQueryKey, session);
+    },
+  });
+}
+
+export function useLogout() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: logout,
+    onSettled: () => {
+      queryClient.setQueryData(sessionQueryKey, null);
+    },
   });
 }

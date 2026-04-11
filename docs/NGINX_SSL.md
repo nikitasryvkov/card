@@ -9,6 +9,7 @@ This project now supports a two-stage Nginx setup:
 
 - `docker-compose.yml`: base stack
 - `docker-compose.prod.yml`: production overlay with domain and Let's Encrypt volumes
+- `.env.example`: local environment template
 - `.env.prod.example`: production environment template
 - `infra/nginx/templates/http.conf.template`: bootstrap HTTP config
 - `infra/nginx/templates/https.conf.template`: HTTPS config
@@ -32,6 +33,7 @@ Fill in:
 
 - `DOMAIN`
 - `LETSENCRYPT_EMAIL`
+- `POSTGRES_PASSWORD`
 - `APP_JWT_SECRET`
 
 ## 3. First start
@@ -42,7 +44,7 @@ Start the stack in bootstrap mode:
 docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 ```
 
-At this stage Nginx serves HTTP on port 80 and exposes `/.well-known/acme-challenge/`.
+At this stage Nginx serves HTTP on port 80, exposes `/.well-known/acme-challenge/`, and keeps the app behind the reverse proxy only.
 
 ## 4. Issue the certificate
 
@@ -77,4 +79,7 @@ Recommended host cron entry:
 ## Notes
 
 - Port 80 must remain reachable from the internet for Let's Encrypt validation.
-- The base compose file still exposes PostgreSQL on `5432`; for stricter production hardening, remove that mapping or restrict it with firewall rules.
+- Port 443 must remain reachable for the final HTTPS endpoint.
+- PostgreSQL is kept on the internal Docker network and is not published publicly.
+- Swagger/OpenAPI are disabled by default in production unless `APP_DOCS_ENABLED=true`.
+- Public health checks should go through `https://<domain>/healthz`, not directly to internal actuator routes.

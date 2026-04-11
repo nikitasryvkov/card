@@ -25,14 +25,19 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     @Transactional
-    public AuthResponse register(RegisterRequest request) {
+    public AuthenticatedSession register(RegisterRequest request) {
         if (userRepository.existsByEmailIgnoreCase(request.email())) {
-            throw new IllegalArgumentException("An account with this email already exists.");
+            throw new IllegalArgumentException("Registration could not be completed.");
+        }
+
+        String companyName = request.companyName() == null ? null : request.companyName().trim();
+        if (companyName != null && companyName.isBlank()) {
+            companyName = null;
         }
 
         User user = User.builder()
                 .fullName(request.fullName().trim())
-                .companyName(request.companyName() == null ? null : request.companyName().trim())
+                .companyName(companyName)
                 .email(request.email().trim().toLowerCase())
                 .passwordHash(passwordEncoder.encode(request.password()))
                 .role(Role.ROLE_USER)
@@ -41,17 +46,24 @@ public class AuthService {
                 .build();
 
         User savedUser = userRepository.save(user);
-        String token = jwtService.generateToken(savedUser);
-        return new AuthResponse(token, savedUser.getEmail(), savedUser.getFullName(), savedUser.getRole().name());
+        return buildAuthenticatedSession(savedUser);
     }
 
-    public AuthResponse login(LoginRequest request) {
+    public AuthenticatedSession login(LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.email(), request.password())
+                new UsernamePasswordAuthenticationToken(request.email().trim().toLowerCase(), request.password())
         );
 
         User user = (User) authentication.getPrincipal();
+        return buildAuthenticatedSession(user);
+    }
+
+    public AuthResponse toResponse(User user) {
+        return new AuthResponse(user.getEmail(), user.getFullName(), user.getRole().name());
+    }
+
+    private AuthenticatedSession buildAuthenticatedSession(User user) {
         String token = jwtService.generateToken(user);
-        return new AuthResponse(token, user.getEmail(), user.getFullName(), user.getRole().name());
+        return new AuthenticatedSession(token, toResponse(user));
     }
 }

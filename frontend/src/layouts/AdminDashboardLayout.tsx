@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { clearSession, getStoredSession } from "../modules/auth/auth-storage";
+import { useNavigate } from "react-router-dom";
+import { useLogout, useSession } from "../modules/auth/auth-hooks";
 
 const menu = [
   { label: "Обзор", value: "Ключевые показатели в реальном времени" },
@@ -10,7 +11,9 @@ const menu = [
 ];
 
 export default function AdminDashboardLayout() {
-  const session = getStoredSession();
+  const navigate = useNavigate();
+  const { data: session } = useSession();
+  const logout = useLogout();
 
   return (
     <div className="min-h-screen bg-ink text-white">
@@ -38,13 +41,13 @@ export default function AdminDashboardLayout() {
 
           <div className="mt-10 rounded-3xl border border-ember/30 bg-ember/10 p-4">
             <div className="text-sm font-semibold text-white">Вы вошли как</div>
-            <div className="mt-1 text-lg font-display text-white">{session?.user.fullName ?? "Администратор"}</div>
-            <div className="text-sm text-white/60">{session?.user.email ?? "admin@agency.local"}</div>
+            <div className="mt-1 text-lg font-display text-white">{session?.fullName ?? "Администратор"}</div>
+            <div className="text-sm text-white/60">{session?.email ?? "admin@agency.local"}</div>
             <button
               className="mt-4 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:bg-sand"
-              onClick={() => {
-                clearSession();
-                window.location.href = "/login";
+              onClick={async () => {
+                await logout.mutateAsync();
+                navigate("/login", { replace: true });
               }}
             >
               Выйти

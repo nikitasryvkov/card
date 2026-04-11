@@ -2,12 +2,13 @@ services:
   app:
     environment:
       APP_ALLOWED_ORIGINS: https://${DOMAIN}
+      APP_DOCS_ENABLED: ${APP_DOCS_ENABLED:-false}
 
   nginx:
     environment:
       DOMAIN: ${DOMAIN}
     ports:
-      - "443:443"
+      - "443:8443"
     volumes:
       - letsencrypt:/etc/letsencrypt
       - certbot_webroot:/var/www/certbot

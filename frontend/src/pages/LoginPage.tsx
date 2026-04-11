@@ -1,17 +1,30 @@
-import { type ReactNode, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLogin } from "../modules/auth/auth-hooks";
+import { type ReactNode, FormEvent, startTransition, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogin, useSession } from "../modules/auth/auth-hooks";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { data: session } = useSession();
   const login = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    if (!session) {
+      return;
+    }
+
+    startTransition(() => {
+      navigate(session.role === "ROLE_ADMIN" ? "/admin" : "/dashboard", { replace: true });
+    });
+  }, [navigate, session]);
+
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     const response = await login.mutateAsync({ email, password });
-    navigate(response.role === "ROLE_ADMIN" ? "/admin" : "/dashboard");
+    startTransition(() => {
+      navigate(response.role === "ROLE_ADMIN" ? "/admin" : "/dashboard", { replace: true });
+    });
   }
 
   return (
@@ -52,7 +65,7 @@ export default function LoginPage() {
 
           {login.isError ? (
             <p className="mt-4 rounded-2xl bg-ember/10 px-4 py-3 text-sm text-ember">
-              Не удалось выполнить вход. Проверьте логин, пароль и доступность backend.
+              Не удалось выполнить вход. Проверьте email, пароль и повторите попытку чуть позже.
             </p>
           ) : null}
 
@@ -63,6 +76,13 @@ export default function LoginPage() {
           >
             {login.isPending ? "Входим..." : "Продолжить"}
           </button>
+
+          <p className="mt-6 text-sm leading-7 text-steel">
+            Нет аккаунта?{" "}
+            <Link to="/register" className="font-semibold text-ink underline underline-offset-4">
+              Зарегистрироваться
+            </Link>
+          </p>
         </form>
       </div>
     </div>

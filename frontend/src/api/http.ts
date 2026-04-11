@@ -1,18 +1,18 @@
 import axios from "axios";
-import { getStoredSession } from "../modules/auth/auth-storage";
 
 const http = axios.create({
   baseURL: import.meta.env.VITE_API_URL ?? "/api",
+  withCredentials: true,
+  withXSRFToken: true,
+  xsrfCookieName: "XSRF-TOKEN",
+  xsrfHeaderName: "X-XSRF-TOKEN",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
 http.interceptors.request.use((config) => {
-  const session = getStoredSession();
-  if (session?.token) {
-    config.headers.Authorization = `Bearer ${session.token}`;
-  }
+  config.headers["X-Request-Id"] = crypto.randomUUID();
   return config;
 });
 

@@ -1,7 +1,6 @@
 export type Role = "ROLE_USER" | "ROLE_ADMIN";
 
 export interface AuthResponse {
-  token: string;
   email: string;
   fullName: string;
   role: Role;
@@ -17,7 +16,6 @@ export interface RegisterPayload extends LoginPayload {
   companyName?: string;
 }
 
-export interface StoredSession {
+export interface CsrfTokenResponse {
   token: string;
-  user: Omit<AuthResponse, "token">;
 }
