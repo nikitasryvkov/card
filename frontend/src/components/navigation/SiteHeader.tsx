@@ -23,8 +23,8 @@ export default function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#08131d]/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link to="/" className="min-w-0 flex items-center gap-3">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:gap-4 sm:px-6 lg:px-8">
+        <Link to="/" className="min-w-0 flex flex-1 items-center gap-3">
           <div className="h-11 w-11 shrink-0 rounded-2xl border border-white/10 bg-white/5 p-2 shadow-panel">
             <div className="flex h-full items-center justify-center rounded-xl border border-white/10 font-display text-sm text-white">
               NS
@@ -46,7 +46,7 @@ export default function SiteHeader() {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2 sm:gap-3">
+        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
           {session ? (
             <>
               <Link
@@ -83,7 +83,7 @@ export default function SiteHeader() {
 
           <a
             href="/#contact"
-            className="inline-flex rounded-full bg-ember px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#ff7b51] sm:px-5"
+            className="hidden rounded-full bg-ember px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-[#ff7b51] min-[390px]:inline-flex sm:px-5"
           >
             <span className="sm:hidden">Заявка</span>
             <span className="hidden sm:inline">Обсудить проект</span>

@@ -228,7 +228,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="mt-8 grid gap-6 lg:grid-cols-4">
+            <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
               {processSteps.map((step, index) => (
                 <ProcessStep key={step.title} index={index + 1} title={step.title} copy={step.copy} />
               ))}
@@ -248,9 +248,9 @@ export default function HomePage() {
 
 function ProcessStep({ index, title, copy }: { index: number; title: string; copy: string }) {
   return (
-    <div className="rounded-[28px] border border-white/10 bg-white/5 p-6">
+    <div className="min-w-0 rounded-[28px] border border-white/10 bg-white/5 p-6">
       <div className="text-xs uppercase tracking-[0.3em] text-aqua">Шаг 0{index}</div>
-      <h3 className="mt-4 text-2xl font-display text-white">{title}</h3>
+      <h3 className="mt-4 break-words text-xl font-display leading-tight text-white sm:text-2xl">{title}</h3>
       <p className="mt-4 text-sm leading-7 text-white/70">{copy}</p>
     </div>
   );

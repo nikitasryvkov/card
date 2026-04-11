@@ -49,25 +49,30 @@ export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-[#08131d] text-white">
       <SiteHeader />
+
       <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="rounded-[36px] border border-white/10 bg-white/5 p-8 shadow-panel backdrop-blur">
-          <p className="text-xs uppercase tracking-[0.35em] text-ember">Политика конфиденциальности</p>
-          <h1 className="mt-4 text-5xl font-display text-white">Обработка персональных данных</h1>
-          <p className="mt-4 text-base leading-8 text-mist/75">
-            Настоящая политика действует в отношении данных, которые пользователь передает через формы сайта,
-            электронную почту и иные каналы связи в рамках запроса услуг, консультации или дальнейшего взаимодействия.
+        <div className="rounded-[36px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur sm:p-8">
+          <p className="text-xs uppercase tracking-[0.24em] text-ember sm:tracking-[0.35em]">Политика конфиденциальности</p>
+          <h1 className="mt-4 text-3xl font-display leading-tight text-white sm:text-5xl">Обработка персональных данных</h1>
+          <p className="mt-4 break-words text-base leading-8 text-mist/75">
+            Настоящая политика действует в отношении данных, которые пользователь передает через формы сайта, электронную
+            почту и иные каналы связи в рамках запроса услуг, консультации или дальнейшего взаимодействия.
           </p>
         </div>
 
         <div className="mt-8 space-y-5">
           {sections.map((section) => (
-            <section key={section.title} className="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur">
-              <h2 className="text-2xl font-display text-white">{section.title}</h2>
-              <p className="mt-3 text-sm leading-8 text-mist/75">{section.body}</p>
+            <section
+              key={section.title}
+              className="rounded-[28px] border border-white/10 bg-white/5 p-5 shadow-panel backdrop-blur sm:p-6"
+            >
+              <h2 className="text-xl font-display leading-tight text-white sm:text-2xl">{section.title}</h2>
+              <p className="mt-3 break-words text-sm leading-8 text-mist/75">{section.body}</p>
             </section>
           ))}
         </div>
       </main>
+
       <SiteFooter />
     </div>
   );

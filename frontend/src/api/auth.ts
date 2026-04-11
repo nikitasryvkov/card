@@ -3,37 +3,24 @@ import http from "./http";
 import type { AuthResponse, CsrfTokenResponse, LoginPayload, RegisterPayload } from "../types/auth";
 
 export async function ensureCsrfToken() {
-  const { data } = await http.get<CsrfTokenResponse>("/v1/auth/csrf");
-  return data;
+  await http.get<CsrfTokenResponse>("/v1/auth/csrf");
 }
 
 export async function login(payload: LoginPayload) {
-  const csrf = await ensureCsrfToken();
-  const { data } = await http.post<AuthResponse>("/v1/auth/login", payload, {
-    headers: {
-      "X-XSRF-TOKEN": csrf.token,
-    },
-  });
+  await ensureCsrfToken();
+  const { data } = await http.post<AuthResponse>("/v1/auth/login", payload);
   return data;
 }
 
 export async function register(payload: RegisterPayload) {
-  const csrf = await ensureCsrfToken();
-  const { data } = await http.post<AuthResponse>("/v1/auth/register", payload, {
-    headers: {
-      "X-XSRF-TOKEN": csrf.token,
-    },
-  });
+  await ensureCsrfToken();
+  const { data } = await http.post<AuthResponse>("/v1/auth/register", payload);
   return data;
 }
 
 export async function logout() {
-  const csrf = await ensureCsrfToken();
-  await http.post("/v1/auth/logout", undefined, {
-    headers: {
-      "X-XSRF-TOKEN": csrf.token,
-    },
-  });
+  await ensureCsrfToken();
+  await http.post("/v1/auth/logout");
 }
 
 export async function getSession() {

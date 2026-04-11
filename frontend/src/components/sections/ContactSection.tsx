@@ -152,7 +152,7 @@ export default function ContactSection() {
 
           <div className="mt-8 rounded-[28px] border border-white/10 bg-[#102435] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-aqua/80">Прозрачность процесса</p>
-            <div className="mt-4 grid gap-3 text-sm text-white/80 sm:grid-cols-2">
+            <div className="mt-4 grid gap-3 text-sm text-white/80 md:grid-cols-2">
               <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">Статусы задач и этапов проекта</div>
               <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">Документы и закрывающие материалы</div>
               <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">История обращений в поддержку</div>
@@ -217,7 +217,7 @@ export default function ContactSection() {
                 type="button"
                 aria-pressed={form.service === item}
                 onClick={() => updateField("service", item)}
-                className={`rounded-full border px-4 py-2 text-sm transition ${
+                className={`max-w-full whitespace-normal break-words rounded-full border px-4 py-2 text-left text-sm transition ${
                   form.service === item
                     ? "border-aqua/60 bg-aqua/10 text-white"
                     : "border-white/10 bg-white/5 text-white/70 hover:border-white/25"
@@ -228,7 +228,7 @@ export default function ContactSection() {
             ))}
           </div>
 
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
             <Field label="Имя" error={errors.name}>
               <input
                 id="contact-name"
@@ -318,20 +318,20 @@ export default function ContactSection() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-mist disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-mist disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
               {isSubmitting ? "Готовим письмо..." : "Получить разбор задачи"}
             </button>
             <a
               href={businessInfo.contacts.phoneHref}
-              className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5"
+              className="w-full rounded-full border border-white/20 px-6 py-3 text-center text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5 sm:w-auto"
             >
               Позвонить
             </a>
             <button
               type="button"
               onClick={handleCopyEmail}
-              className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5"
+              className="w-full rounded-full border border-white/20 px-6 py-3 text-center text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5 sm:w-auto"
             >
               {isEmailCopied ? "Email скопирован" : "Скопировать email"}
             </button>
@@ -374,7 +374,7 @@ function InfoCard({ label, value, href }: { label: string; value: string; href?:
   const content = (
     <>
       <div className="text-xs uppercase tracking-[0.25em] text-aqua/80">{label}</div>
-      <div className="mt-2 text-base font-semibold text-white">{value}</div>
+      <div className="mt-2 break-words text-base font-semibold text-white">{value}</div>
     </>
   );
 

@@ -15,11 +15,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
+  max-width: 100%;
+  overflow-x: clip;
   color: #f4efe8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -31,6 +34,7 @@ body {
 
 #root {
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 @layer base {

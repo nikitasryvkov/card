@@ -46,10 +46,10 @@ export default function RequisitesPage() {
               Если вам нужен договор, счет или коммерческое предложение, отправьте запрос через форму на главной странице или напишите напрямую.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <a href={businessInfo.contacts.emailHref} className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink">
+              <a href={businessInfo.contacts.emailHref} className="w-full rounded-full bg-white px-5 py-3 text-center text-sm font-semibold text-ink sm:w-auto">
                 Написать на email
               </a>
-              <Link to="/#contact" className="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white">
+              <Link to="/#contact" className="w-full rounded-full border border-white/15 px-5 py-3 text-center text-sm font-semibold text-white sm:w-auto">
                 Оставить заявку
               </Link>
             </div>
@@ -73,8 +73,8 @@ function InfoBlock({ title, children }: { title: string; children: ReactNode }) 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-[#102435] px-4 py-4">
-      <div className="text-xs uppercase tracking-[0.25em] text-aqua/80">{label}</div>
-      <div className="mt-2 text-sm leading-7 text-white/85">{value}</div>
+      <div className="text-xs uppercase tracking-[0.18em] text-aqua/80 sm:tracking-[0.25em]">{label}</div>
+      <div className="mt-2 break-all text-sm leading-7 text-white/85 sm:break-words">{value}</div>
     </div>
   );
 }

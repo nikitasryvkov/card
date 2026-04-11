@@ -44,7 +44,7 @@ export default function MvpCalculatorSection() {
               После короткого разбора смета уточняется по ролям, интеграциям, рискам и требованиям к безопасности.
             </p>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
               {calculatorOptions.map((option) => {
                 const isSelected = selected.includes(option.id);
 
@@ -54,13 +54,13 @@ export default function MvpCalculatorSection() {
                     type="button"
                     aria-pressed={isSelected}
                     onClick={() => toggleOption(option.id)}
-                    className={`rounded-[24px] border px-5 py-5 text-left transition ${
+                    className={`max-w-full rounded-[24px] border px-5 py-5 text-left transition ${
                       isSelected
                         ? "border-aqua/60 bg-aqua/10 text-white"
                         : "border-white/10 bg-white/5 text-white/80 hover:border-white/25"
                     }`}
                   >
-                    <div className="text-sm font-semibold">{option.label}</div>
+                    <div className="break-words text-sm font-semibold">{option.label}</div>
                     <div className="mt-2 text-xs uppercase tracking-[0.2em] text-white/60">+ от {formatCurrency(option.price)}</div>
                   </button>
                 );
@@ -71,7 +71,7 @@ export default function MvpCalculatorSection() {
           <div className="p-8 lg:p-10">
             <div aria-live="polite" aria-atomic="true" className="rounded-[32px] border border-white/10 bg-white/5 p-6">
               <div className="text-xs uppercase tracking-[0.35em] text-amber-200">Предварительная оценка</div>
-              <div className="mt-4 text-4xl font-display text-white">
+              <div className="mt-4 break-words text-3xl font-display leading-tight text-white sm:text-4xl">
                 {formatCurrency(minPrice)} — {formatCurrency(maxPrice)}
               </div>
               <p className="mt-4 text-sm leading-7 text-mist/75">

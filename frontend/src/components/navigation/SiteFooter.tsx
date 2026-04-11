@@ -7,7 +7,7 @@ export default function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
         <div>
           <p className="text-xs uppercase tracking-[0.35em] text-aqua">Реквизиты и контакты</p>
-          <h2 className="mt-4 text-3xl font-display text-white">{businessInfo.shortName}</h2>
+          <h2 className="mt-4 text-2xl font-display text-white sm:text-3xl">{businessInfo.shortName}</h2>
           <p className="mt-4 max-w-2xl text-sm leading-7 text-mist/70">
             Разработка ПО, архитектура высоконагруженных систем, UX/UI дизайн и запуск цифровых сервисов под ключ.
           </p>
@@ -60,7 +60,7 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 px-4 py-4 text-center text-xs text-white/50 sm:px-6 lg:px-8">
+      <div className="border-t border-white/10 px-4 py-4 text-center text-xs leading-6 text-white/50 break-words sm:px-6 lg:px-8">
         {businessInfo.shortName} • ОКВЭД: {businessInfo.okved.join(", ")} • Система налогообложения: {businessInfo.taxation}
       </div>
     </footer>

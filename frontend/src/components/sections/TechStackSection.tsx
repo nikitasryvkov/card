@@ -56,7 +56,7 @@ export default function TechStackSection() {
                 {group.technologies.map((technology) => (
                   <span
                     key={technology}
-                    className="rounded-full border border-white/10 bg-[#102435] px-3 py-1.5 text-xs font-semibold text-white/80"
+                    className="max-w-full break-words rounded-full border border-white/10 bg-[#102435] px-3 py-1.5 text-xs font-semibold text-white/80"
                   >
                     {technology}
                   </span>
