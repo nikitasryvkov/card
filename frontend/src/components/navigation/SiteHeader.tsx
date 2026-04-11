@@ -30,9 +30,10 @@ export default function SiteHeader() {
               NS
             </div>
           </div>
+
           <div className="min-w-0">
-            <div className="truncate font-display text-lg text-white">Срывков Systems</div>
-            <div className="hidden text-xs uppercase tracking-[0.3em] text-white/50 sm:block">
+            <div className="truncate font-display text-base text-white sm:text-lg">Срывков Systems</div>
+            <div className="hidden text-xs uppercase tracking-[0.2em] text-white/50 sm:block lg:tracking-[0.3em]">
               Java • React • Серверная архитектура
             </div>
           </div>

@@ -78,16 +78,16 @@ export default function HomePage() {
 
           <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-14 sm:px-6 lg:px-8 lg:pb-28 lg:pt-20">
             <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-              <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-aqua">Разработка ПО • Архитектура • UX/UI</p>
-                <h1 className="mt-6 max-w-5xl text-4xl font-display leading-[0.96] text-white sm:text-6xl lg:text-7xl">
+              <div className="min-w-0">
+                <p className="text-xs uppercase tracking-[0.2em] text-aqua sm:tracking-[0.35em]">Разработка ПО • Архитектура • UX/UI</p>
+                <h1 className="mt-6 max-w-5xl break-words text-3xl font-display leading-[0.98] text-white sm:text-6xl lg:text-7xl">
                   Создаем отказоустойчивые ИТ-решения: от интерфейса до серверной архитектуры.
                 </h1>
                 <p className="mt-6 max-w-3xl text-base leading-8 text-mist/80 sm:text-lg">
-                  Вы получаете не просто разработку, а готовую цифровую систему: backend на Java,
-                  интерфейс на React, базу данных, роли доступа и публикацию на сервере. Подходит для
-                  MVP, личных кабинетов, CRM и внутренних сервисов, которые нужно запускать без
-                  технического хаоса и переписывания после первого релиза.
+                  Вы получаете не просто разработку, а готовую цифровую систему: backend на Java, интерфейс на React,
+                  базу данных, роли доступа и публикацию на сервере. Подходит для MVP, личных кабинетов, CRM и
+                  внутренних сервисов, которые нужно запускать без технического хаоса и переписывания после первого
+                  релиза.
                 </p>
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -109,7 +109,7 @@ export default function HomePage() {
                   {heroDeliverables.map((item) => (
                     <div
                       key={item}
-                      className="rounded-[24px] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-6 text-white/80"
+                      className="min-w-0 rounded-[24px] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-6 text-white/80"
                     >
                       {item}
                     </div>
@@ -117,36 +117,40 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="relative">
+              <div className="relative min-w-0">
                 <div className="absolute -left-3 top-12 hidden h-32 w-32 rounded-full bg-aqua/20 blur-3xl sm:block" />
                 <div className="absolute -bottom-8 right-0 h-36 w-36 rounded-full bg-ember/20 blur-3xl" />
 
-                <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur-xl">
-                  <div className="flex flex-col items-start gap-4 rounded-[28px] border border-white/10 bg-white/5 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <div className="text-xs uppercase tracking-[0.3em] text-aqua">Под ключ</div>
-                      <div className="mt-2 text-2xl font-display text-white">От идеи и MVP до релиза на сервере</div>
-                    </div>
-                    <div className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/70">
-                      Clean Architecture
+                <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-5 shadow-panel backdrop-blur-xl sm:p-6">
+                  <div className="min-w-0 rounded-[28px] border border-white/10 bg-white/5 px-5 py-4">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="min-w-0">
+                        <div className="text-xs uppercase tracking-[0.2em] text-aqua sm:tracking-[0.3em]">Под ключ</div>
+                        <div className="mt-2 break-words text-xl font-display leading-tight text-white sm:text-2xl">
+                          От идеи и MVP до релиза на сервере
+                        </div>
+                      </div>
+                      <div className="max-w-full whitespace-normal break-words rounded-full border border-white/10 bg-white/10 px-4 py-2 text-center text-xs uppercase tracking-[0.16em] text-white/70 sm:tracking-[0.2em]">
+                        Clean Architecture
+                      </div>
                     </div>
                   </div>
 
                   <div className="mt-6 grid gap-4">
                     {operatingModel.map((item, index) => (
-                      <div key={item} className="rounded-[28px] border border-white/10 bg-[#0f2435]/80 p-5">
-                        <div className="text-xs uppercase tracking-[0.3em] text-aqua/80">0{index + 1}</div>
+                      <div key={item} className="min-w-0 rounded-[28px] border border-white/10 bg-[#0f2435]/80 p-5">
+                        <div className="text-xs uppercase tracking-[0.2em] text-aqua/80 sm:tracking-[0.3em]">0{index + 1}</div>
                         <div className="mt-3 text-sm leading-7 text-white/80">{item}</div>
                       </div>
                     ))}
                   </div>
 
                   <div className="mt-6 rounded-[28px] border border-emerald-300/20 bg-emerald-300/10 px-5 py-5">
-                    <div className="text-xs uppercase tracking-[0.3em] text-emerald-200">Результат для бизнеса</div>
+                    <div className="text-xs uppercase tracking-[0.2em] text-emerald-200 sm:tracking-[0.3em]">Результат для бизнеса</div>
                     <p className="mt-3 text-sm leading-7 text-white/80">
-                      На выходе у вас рабочий код, задеплоенный сервис, документация по API и понятный
-                      план развития продукта. Это снижает риск потери контекста, упрощает дальнейшие
-                      доработки и ускоряет запуск следующих функций.
+                      На выходе у вас рабочий код, задеплоенный сервис, документация по API и понятный план развития
+                      продукта. Это снижает риск потери контекста, упрощает дальнейшие доработки и ускоряет запуск
+                      следующих функций.
                     </p>
                   </div>
                 </div>
@@ -160,9 +164,11 @@ export default function HomePage() {
 
         <section id="portfolio" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-ember">Форматы проектов</p>
-              <h2 className="mt-4 text-3xl font-display text-white sm:text-4xl">Решения, которые можно запускать и развивать без переписывания с нуля</h2>
+            <div className="min-w-0">
+              <p className="text-xs uppercase tracking-[0.22em] text-ember sm:tracking-[0.35em]">Форматы проектов</p>
+              <h2 className="mt-4 text-3xl font-display leading-tight text-white sm:text-4xl">
+                Решения, которые можно запускать и развивать без переписывания с нуля
+              </h2>
             </div>
             <p className="max-w-xl text-sm leading-7 text-mist/70">
               Ниже показаны направления работ, с которыми я чаще всего помогаю бизнесу: личные кабинеты,
@@ -175,16 +181,20 @@ export default function HomePage() {
               ? projects.slice(0, 3).map((project) => (
                   <article
                     key={project.id}
-                    className="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur"
+                    className="min-w-0 rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur"
                   >
-                    <div className="text-xs uppercase tracking-[0.35em] text-aqua">{translateProjectStatus(project.status)}</div>
-                    <h3 className="mt-4 text-2xl font-display text-white">{project.title}</h3>
+                    <div className="text-xs uppercase tracking-[0.22em] text-aqua sm:tracking-[0.35em]">
+                      {translateProjectStatus(project.status)}
+                    </div>
+                    <h3 className="mt-4 break-words text-xl font-display leading-tight text-white sm:text-2xl">
+                      {project.title}
+                    </h3>
                     <p className="mt-3 text-sm leading-7 text-mist/75">{project.shortDescription}</p>
                     <div className="mt-5 flex flex-wrap gap-2">
                       {project.techStack.map((item) => (
                         <span
                           key={item}
-                          className="rounded-full border border-white/10 bg-[#102435] px-3 py-1 text-xs font-semibold text-white/80"
+                          className="max-w-full break-words rounded-full border border-white/10 bg-[#102435] px-3 py-1 text-xs font-semibold text-white/80"
                         >
                           {item}
                         </span>
@@ -195,16 +205,18 @@ export default function HomePage() {
               : fallbackProjects.map((project) => (
                   <article
                     key={project.title}
-                    className="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur"
+                    className="min-w-0 rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel backdrop-blur"
                   >
-                    <div className="text-xs uppercase tracking-[0.35em] text-aqua/80">Направление работ</div>
-                    <h3 className="mt-4 text-2xl font-display text-white">{project.title}</h3>
+                    <div className="text-xs uppercase tracking-[0.22em] text-aqua/80 sm:tracking-[0.35em]">Направление работ</div>
+                    <h3 className="mt-4 break-words text-xl font-display leading-tight text-white sm:text-2xl">
+                      {project.title}
+                    </h3>
                     <p className="mt-3 text-sm leading-7 text-mist/75">{project.description}</p>
                     <div className="mt-5 flex flex-wrap gap-2">
                       {project.stack.map((item) => (
                         <span
                           key={item}
-                          className="rounded-full border border-white/10 bg-[#102435] px-3 py-1 text-xs font-semibold text-white/80"
+                          className="max-w-full break-words rounded-full border border-white/10 bg-[#102435] px-3 py-1 text-xs font-semibold text-white/80"
                         >
                           {item}
                         </span>
@@ -218,13 +230,15 @@ export default function HomePage() {
         <section id="process" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="rounded-[40px] border border-white/10 bg-[#0d1d2b] px-6 py-12 text-white shadow-panel sm:px-10">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-aqua">Как строится работа</p>
-                <h2 className="mt-4 text-3xl font-display text-white sm:text-4xl">Предсказуемый процесс вместо хаотичной разработки без опоры на архитектуру</h2>
+              <div className="min-w-0">
+                <p className="text-xs uppercase tracking-[0.22em] text-aqua sm:tracking-[0.35em]">Как строится работа</p>
+                <h2 className="mt-4 text-3xl font-display leading-tight text-white sm:text-4xl">
+                  Предсказуемый процесс вместо хаотичной разработки без опоры на архитектуру
+                </h2>
               </div>
               <p className="max-w-xl text-sm leading-7 text-white/70">
-                На каждом этапе понятно, что уже сделано, какие решения приняты, где находятся риски и
-                когда проект переходит к следующему шагу: от аналитики до публикации на сервере.
+                На каждом этапе понятно, что уже сделано, какие решения приняты, где находятся риски и когда проект
+                переходит к следующему шагу: от аналитики до публикации на сервере.
               </p>
             </div>
 
@@ -249,7 +263,7 @@ export default function HomePage() {
 function ProcessStep({ index, title, copy }: { index: number; title: string; copy: string }) {
   return (
     <div className="min-w-0 rounded-[28px] border border-white/10 bg-white/5 p-6">
-      <div className="text-xs uppercase tracking-[0.3em] text-aqua">Шаг 0{index}</div>
+      <div className="text-xs uppercase tracking-[0.2em] text-aqua sm:tracking-[0.3em]">Шаг 0{index}</div>
       <h3 className="mt-4 break-words text-xl font-display leading-tight text-white sm:text-2xl">{title}</h3>
       <p className="mt-4 text-sm leading-7 text-white/70">{copy}</p>
     </div>
