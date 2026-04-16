@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { businessInfo } from "../../lib/business";
 
 const navItems = [
   { href: "/#services", label: "Услуги" },
@@ -45,11 +46,13 @@ export default function SiteHeader() {
 
         <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
           <a
-            href="/#contact"
+            href={businessInfo.contacts.telegramHref}
+            target="_blank"
+            rel="noreferrer"
             className="hidden rounded-full bg-ember px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-[#ff7b51] min-[390px]:inline-flex sm:px-5"
           >
-            <span className="sm:hidden">Заявка</span>
-            <span className="hidden sm:inline">Обсудить проект</span>
+            <span className="sm:hidden">Telegram</span>
+            <span className="hidden sm:inline">Написать в Telegram</span>
           </a>
 
           <button
@@ -90,10 +93,12 @@ export default function SiteHeader() {
 
           <div className="mt-4 grid gap-2">
             <a
-              href="/#contact"
+              href={businessInfo.contacts.telegramHref}
+              target="_blank"
+              rel="noreferrer"
               className="rounded-2xl bg-white px-4 py-3 text-center text-sm font-semibold text-ink"
             >
-              Обсудить проект
+              Написать в Telegram
             </a>
           </div>
         </div>

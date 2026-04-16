@@ -7,6 +7,7 @@ import ContactSection from "../components/sections/ContactSection";
 import MvpCalculatorSection from "../components/sections/MvpCalculatorSection";
 import Services from "../components/sections/Services";
 import TechStackSection from "../components/sections/TechStackSection";
+import { businessInfo } from "../lib/business";
 
 const heroDeliverables = [
   "Работающий MVP, кабинет клиента или внутренняя система под ваши процессы",
@@ -43,7 +44,7 @@ const fallbackProjects = [
   {
     title: "Личный кабинет для сервиса услуг",
     description:
-      "Онлайн-заявки, документы, статусы работ, история обращений и единый рабочий контур для клиента и исполнителя.",
+      "Онлайн-обращения, документы, статусы работ, история коммуникаций и единый рабочий контур для клиента и исполнителя.",
     stack: ["Java", "Spring Boot", "React", "PostgreSQL"],
   },
   {
@@ -92,16 +93,18 @@ export default function HomePage() {
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <a
-                    href="#contact"
+                    href={businessInfo.contacts.telegramHref}
+                    target="_blank"
+                    rel="noreferrer"
                     className="inline-flex justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-mist"
                   >
-                    Обсудить проект
+                    Написать в Telegram
                   </a>
                   <a
                     href="#calculator"
                     className="inline-flex justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5"
                   >
-                    Получить консультацию
+                    Рассчитать бюджет
                   </a>
                 </div>
 

@@ -23,10 +23,13 @@ export const businessInfo = {
     phoneHref: "tel:+79539662665",
     email: "n.sryvkov@yandex.ru",
     emailHref: "mailto:n.sryvkov@yandex.ru",
+    telegram: "@MurrrrMayy",
+    telegramHref: "https://t.me/MurrrrMayy",
   },
   okved: ["62.01", "62.02.1", "74.10"],
   taxation: "ПСН, НПД",
-  workingHours: "Прием заявок через сайт — круглосуточно. Обработка обращений — в рабочие дни по московскому времени.",
+  workingHours:
+    "Связаться можно в любое время через сайт, email или Telegram. Обработка обращений — в рабочие дни по московскому времени.",
   personalData: {
     operatorEmail: "n.sryvkov@yandex.ru",
     operatorPhone: "+7 953 966-26-65",

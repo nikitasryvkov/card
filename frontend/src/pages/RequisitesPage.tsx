@@ -56,7 +56,7 @@ export default function RequisitesPage() {
           <InfoBlock title="Документы и связь">
             <p className="text-sm leading-7 text-mist/75">
               Для запроса договора, счета, коммерческого предложения или уточнения состава услуг можно
-              написать на email или оставить заявку через форму на главной странице.
+              написать на email, в Telegram или связаться по телефону.
             </p>
 
             <div className="mt-1 flex flex-wrap gap-3">
@@ -78,12 +78,12 @@ export default function RequisitesPage() {
               >
                 Согласие на обработку ПД
               </Link>
-              <Link
-                to="/#contact"
+              <a
+                href={businessInfo.contacts.telegramHref}
                 className="w-full rounded-full border border-white/15 px-5 py-3 text-center text-sm font-semibold text-white transition hover:border-white/30 sm:w-auto"
               >
-                Оставить заявку
-              </Link>
+                Написать в Telegram
+              </a>
             </div>
           </InfoBlock>
         </div>

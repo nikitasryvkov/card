@@ -26,6 +26,12 @@ export default function SiteFooter() {
             >
               {businessInfo.contacts.email}
             </a>
+            <a
+              href={businessInfo.contacts.telegramHref}
+              className="rounded-full border border-white/10 px-4 py-2 font-semibold text-white transition hover:border-white/25"
+            >
+              {businessInfo.contacts.telegram}
+            </a>
           </div>
 
           <p className="mt-5 max-w-2xl text-xs leading-6 text-white/55">{businessInfo.workingHours}</p>
@@ -66,7 +72,7 @@ export default function SiteFooter() {
                 Согласие на обработку ПД
               </Link>
               <a className="block font-semibold text-white transition hover:text-aqua" href="/#contact">
-                Оставить заявку
+                Связаться
               </a>
             </div>
           </nav>
