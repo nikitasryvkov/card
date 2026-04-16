@@ -16,8 +16,9 @@ export default function RequisitesPage() {
             Юридическая и платежная информация
           </h1>
           <p className="mt-4 max-w-3xl break-words text-base leading-8 text-mist/75">
-            Страница содержит сведения об исполнителе, банковские реквизиты и контакты для выставления счета,
-            подготовки договора и проверки контрагента.
+            Страница содержит сведения об исполнителе, данные государственной регистрации, режим приема
+            обращений, банковские реквизиты и контакты для выставления счета, подготовки договора и проверки
+            контрагента.
           </p>
         </div>
 
@@ -29,6 +30,12 @@ export default function RequisitesPage() {
             <InfoRow label="ОГРНИП" value={businessInfo.ogrnip} />
             <InfoRow label="ОКВЭД" value={businessInfo.okved.join(", ")} />
             <InfoRow label="Система налогообложения" value={businessInfo.taxation} />
+          </InfoBlock>
+
+          <InfoBlock title="Государственная регистрация">
+            <InfoRow label="Дата регистрации" value={businessInfo.registrationDetails.date} />
+            <InfoRow label="Регистрирующий орган" value={businessInfo.registrationDetails.authority} />
+            <InfoRow label="Режим приема обращений" value={businessInfo.workingHours} />
           </InfoBlock>
 
           <InfoBlock title="Адреса и контакты">
@@ -48,8 +55,8 @@ export default function RequisitesPage() {
 
           <InfoBlock title="Документы и связь">
             <p className="text-sm leading-7 text-mist/75">
-              Для запроса договора, счета, коммерческого предложения или уточнения состава услуг можно написать
-              на email или оставить заявку через форму на главной странице.
+              Для запроса договора, счета, коммерческого предложения или уточнения состава услуг можно
+              написать на email или оставить заявку через форму на главной странице.
             </p>
 
             <div className="mt-1 flex flex-wrap gap-3">
@@ -64,6 +71,12 @@ export default function RequisitesPage() {
                 className="w-full rounded-full border border-white/15 px-5 py-3 text-center text-sm font-semibold text-white transition hover:border-white/30 sm:w-auto"
               >
                 Открыть оферту
+              </Link>
+              <Link
+                to="/consent"
+                className="w-full rounded-full border border-white/15 px-5 py-3 text-center text-sm font-semibold text-white transition hover:border-white/30 sm:w-auto"
+              >
+                Согласие на обработку ПД
               </Link>
               <Link
                 to="/#contact"

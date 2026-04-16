@@ -9,8 +9,8 @@ export default function SiteFooter() {
           <p className="text-xs uppercase tracking-[0.35em] text-aqua">Реквизиты и контакты</p>
           <h2 className="mt-4 text-2xl font-display text-white sm:text-3xl">{businessInfo.shortName}</h2>
           <p className="mt-4 max-w-2xl text-sm leading-7 text-mist/70">
-            Разработка ПО, архитектура высоконагруженных систем, UX/UI дизайн и запуск цифровых сервисов под
-            ключ для бизнеса и продуктовых команд.
+            Разработка ПО, проектирование цифровых сервисов, UX/UI-дизайн и сопровождение проектов для
+            бизнеса. На сайте размещены открытые реквизиты, оферта и документы по персональным данным.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3 text-sm">
@@ -27,6 +27,8 @@ export default function SiteFooter() {
               {businessInfo.contacts.email}
             </a>
           </div>
+
+          <p className="mt-5 max-w-2xl text-xs leading-6 text-white/55">{businessInfo.workingHours}</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -40,6 +42,10 @@ export default function SiteFooter() {
               <div>
                 <div className="font-semibold">ОГРНИП</div>
                 <div>{businessInfo.ogrnip}</div>
+              </div>
+              <div>
+                <div className="font-semibold">Регистрирующий орган</div>
+                <div>{businessInfo.registrationDetails.authority}</div>
               </div>
             </div>
           </div>
@@ -55,6 +61,9 @@ export default function SiteFooter() {
               </Link>
               <Link className="block font-semibold text-white transition hover:text-aqua" to="/privacy">
                 Политика конфиденциальности
+              </Link>
+              <Link className="block font-semibold text-white transition hover:text-aqua" to="/consent">
+                Согласие на обработку ПД
               </Link>
               <a className="block font-semibold text-white transition hover:text-aqua" href="/#contact">
                 Оставить заявку

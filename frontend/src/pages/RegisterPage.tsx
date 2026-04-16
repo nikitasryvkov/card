@@ -10,6 +10,7 @@ type RegisterFormState = {
   companyName: string;
   email: string;
   password: string;
+  consent: boolean;
 };
 
 type RegisterFieldErrors = Partial<Record<keyof RegisterFormState, string>>;
@@ -19,6 +20,7 @@ const initialForm: RegisterFormState = {
   companyName: "",
   email: "",
   password: "",
+  consent: false,
 };
 
 export default function RegisterPage() {
@@ -67,6 +69,10 @@ export default function RegisterPage() {
 
     if (nextForm.password.length < 8) {
       nextErrors.password = "Пароль должен содержать минимум 8 символов.";
+    }
+
+    if (!nextForm.consent) {
+      nextErrors.consent = "Для регистрации нужно согласие на обработку персональных данных.";
     }
 
     return nextErrors;
@@ -208,6 +214,32 @@ export default function RegisterPage() {
             </Field>
           </div>
 
+          <label className="mt-6 block rounded-2xl border border-white/10 bg-[#102435] px-4 py-4 text-sm text-mist/75">
+            <span className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                checked={form.consent}
+                onChange={(event) => updateField("consent", event.target.checked)}
+                aria-invalid={Boolean(errors.consent)}
+                required
+                disabled={register.isPending}
+                className="mt-1 h-4 w-4 rounded border-white/20 bg-transparent"
+              />
+              <span>
+                Я даю согласие на обработку персональных данных и подтверждаю, что ознакомился с{" "}
+                <Link to="/privacy" className="font-semibold text-white underline underline-offset-4">
+                  политикой конфиденциальности
+                </Link>{" "}
+                и{" "}
+                <Link to="/consent" className="font-semibold text-white underline underline-offset-4">
+                  согласием на обработку персональных данных
+                </Link>
+                .
+              </span>
+            </span>
+            {errors.consent ? <span className="mt-3 block text-sm text-amber-200">{errors.consent}</span> : null}
+          </label>
+
           {formError ? (
             <p role="alert" className="mt-4 rounded-2xl bg-ember/10 px-4 py-3 text-sm text-ember">
               {formError}
@@ -221,6 +253,14 @@ export default function RegisterPage() {
           >
             {register.isPending ? "Создаем аккаунт..." : "Создать аккаунт"}
           </button>
+
+          <p className="mt-4 text-xs leading-6 text-mist/65">
+            Создавая аккаунт, вы также подтверждаете ознакомление с{" "}
+            <Link to="/offer" className="font-semibold text-white underline underline-offset-4">
+              публичной офертой
+            </Link>
+            .
+          </p>
 
           <p className="mt-6 text-sm leading-7 text-mist/75">
             Уже есть аккаунт?{" "}

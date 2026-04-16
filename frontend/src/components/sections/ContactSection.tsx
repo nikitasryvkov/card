@@ -183,6 +183,9 @@ export default function ContactSection() {
               <Link className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white" to="/privacy">
                 Политика конфиденциальности
               </Link>
+              <Link className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white" to="/consent">
+                Согласие на обработку ПД
+              </Link>
             </div>
           </div>
         </div>
@@ -305,9 +308,13 @@ export default function ContactSection() {
               className="mt-1 h-4 w-4 rounded border-white/20 bg-transparent"
             />
             <span>
-              Я соглашаюсь на обработку персональных данных в соответствии с{" "}
+              Я даю согласие на обработку персональных данных и подтверждаю, что ознакомился с{" "}
               <Link className="font-semibold text-white underline underline-offset-4" to="/privacy">
                 политикой конфиденциальности
+              </Link>
+              {" "}и{" "}
+              <Link className="font-semibold text-white underline underline-offset-4" to="/consent">
+                согласием на обработку персональных данных
               </Link>
               .
             </span>

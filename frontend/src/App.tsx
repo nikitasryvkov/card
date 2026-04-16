@@ -10,6 +10,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import RequisitesPage from "./pages/RequisitesPage";
 import OfferPage from "./pages/OfferPage";
 import PrivacyPage from "./pages/PrivacyPage";
+import ConsentPage from "./pages/ConsentPage";
 import ProtectedRoute from "./router/ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: "requisites", element: <RequisitesPage /> },
       { path: "offer", element: <OfferPage /> },
       { path: "privacy", element: <PrivacyPage /> },
+      { path: "consent", element: <ConsentPage /> },
       {
         element: <ProtectedRoute allowedRoles={["ROLE_USER", "ROLE_ADMIN"]} />,
         children: [{ path: "dashboard", element: <ClientDashboardPage /> }],
