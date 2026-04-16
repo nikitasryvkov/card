@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useLogout, useSession } from "../../modules/auth/auth-hooks";
 
 const navItems = [
   { href: "/#services", label: "Услуги" },
@@ -12,10 +11,7 @@ const navItems = [
 
 export default function SiteHeader() {
   const location = useLocation();
-  const { data: session } = useSession();
-  const logout = useLogout();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const dashboardHref = session?.role === "ROLE_ADMIN" ? "/admin" : "/dashboard";
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -48,40 +44,6 @@ export default function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
-          {session ? (
-            <>
-              <Link
-                to={dashboardHref}
-                className="hidden rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-white hover:border-white/25 sm:inline-flex"
-              >
-                {session.role === "ROLE_ADMIN" ? "Админка" : "Кабинет"}
-              </Link>
-              <button
-                type="button"
-                onClick={() => logout.mutate()}
-                disabled={logout.isPending}
-                className="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink hover:bg-mist disabled:opacity-60 sm:inline-flex"
-              >
-                {logout.isPending ? "Выходим..." : "Выйти"}
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/register"
-                className="hidden rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-white hover:border-white/25 sm:inline-flex"
-              >
-                Регистрация
-              </Link>
-              <Link
-                to="/login"
-                className="hidden rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink hover:bg-mist sm:inline-flex"
-              >
-                Войти
-              </Link>
-            </>
-          )}
-
           <a
             href="/#contact"
             className="hidden rounded-full bg-ember px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-[#ff7b51] min-[390px]:inline-flex sm:px-5"
@@ -127,33 +89,12 @@ export default function SiteHeader() {
           </nav>
 
           <div className="mt-4 grid gap-2">
-            {session ? (
-              <>
-                <Link
-                  to={dashboardHref}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white"
-                >
-                  {session.role === "ROLE_ADMIN" ? "Перейти в админку" : "Перейти в кабинет"}
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => logout.mutate()}
-                  disabled={logout.isPending}
-                  className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-ink disabled:opacity-60"
-                >
-                  {logout.isPending ? "Выходим..." : "Выйти"}
-                </button>
-              </>
-            ) : (
-              <>
-                <Link to="/register" className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white">
-                  Регистрация
-                </Link>
-                <Link to="/login" className="rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-ink">
-                  Войти
-                </Link>
-              </>
-            )}
+            <a
+              href="/#contact"
+              className="rounded-2xl bg-white px-4 py-3 text-center text-sm font-semibold text-ink"
+            >
+              Обсудить проект
+            </a>
           </div>
         </div>
       ) : null}

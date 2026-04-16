@@ -1,17 +1,11 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
-import AdminDashboardLayout from "./layouts/AdminDashboardLayout";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import ClientDashboardPage from "./pages/ClientDashboardPage";
-import AdminOverviewPage from "./pages/admin/AdminOverviewPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import RequisitesPage from "./pages/RequisitesPage";
 import OfferPage from "./pages/OfferPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import ConsentPage from "./pages/ConsentPage";
-import ProtectedRoute from "./router/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -19,26 +13,14 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "login", element: <LoginPage /> },
-      { path: "register", element: <RegisterPage /> },
       { path: "requisites", element: <RequisitesPage /> },
       { path: "offer", element: <OfferPage /> },
       { path: "privacy", element: <PrivacyPage /> },
       { path: "consent", element: <ConsentPage /> },
-      {
-        element: <ProtectedRoute allowedRoles={["ROLE_USER", "ROLE_ADMIN"]} />,
-        children: [{ path: "dashboard", element: <ClientDashboardPage /> }],
-      },
-      {
-        path: "admin",
-        element: <ProtectedRoute allowedRoles={["ROLE_ADMIN"]} />,
-        children: [
-          {
-            element: <AdminDashboardLayout />,
-            children: [{ index: true, element: <AdminOverviewPage /> }],
-          },
-        ],
-      },
+      { path: "login", element: <Navigate to="/" replace /> },
+      { path: "register", element: <Navigate to="/" replace /> },
+      { path: "dashboard", element: <Navigate to="/" replace /> },
+      { path: "admin", element: <Navigate to="/" replace /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },
